@@ -7,7 +7,6 @@ import {
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import Button from "./Layout/Button";
-import useAuth from "../hooks/useAuth";
 
 const links = [
   {
@@ -27,7 +26,9 @@ const Sidebar = ({ onClose, className }) => {
     onClose?.();
   };
 
-  const { logout } = useAuth();
+  const handleLogout = ()=>{
+    console.log("Logout")
+  }
 
   return (
     <aside className={className}>
@@ -52,7 +53,7 @@ const Sidebar = ({ onClose, className }) => {
         })}
       </div>
 
-      <Button onClick={logout} className="dangerBtn mt-auto">
+      <Button onClick={handleLogout} className="dangerBtn mt-auto">
         Logout
       </Button>
     </aside>
