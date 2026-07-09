@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
