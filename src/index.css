@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@layer components {
+  .myBtn {
+    @apply cursor-pointer rounded-lg bg-purple-600 p-2 font-medium text-white transition-colors duration-200 hover:bg-purple-700 lg:px-4 lg:py-2;
+  }
+
+  .dangerBtn {
+    @apply bg-red-600 hover:bg-red-700;
+  }
+
+  .hollowBtn {
+    @apply border border-purple-600 bg-white text-purple-600 hover:bg-purple-100;
+  }
+
+  .myContainer {
+    @apply mx-auto max-w-[1200px];
+  }
+
+  .sections {
+    @apply rounded-xl bg-white px-3 py-6;
+  }
+
+  .section-heading {
+    @apply text-lg font-bold md:text-lg lg:text-xl xl:font-medium;
+  }
+
+  .tag {
+    @apply px-2 py-1 text-sm font-bold;
+  }
+}
