@@ -4,6 +4,7 @@ import Profile from "./Pages/Profile/Profile";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Signin from "./Pages/Auth/Signin/Signin";
+import Signup from "./Pages/Auth/Signup/Signup";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +16,12 @@ const router = createBrowserRouter([
     element: <Profile />,
   },
   {
-    path: "/sign-in/",
+    path: "/sign-in",
     element: <Signin />,
+  },
+  {
+    path: "/sign-up",
+    element: <Signup />,
   },
 ]);
 

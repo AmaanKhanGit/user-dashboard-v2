@@ -1,3 +1,4 @@
+import { useUser } from "@clerk/react";
 import DashboardLayout from "../../components/DashboardLayout";
 import DashboardHero from "./components/DashboardHero";
 import ProductivityGraph from "./components/ProductivityGraph";
@@ -6,6 +7,8 @@ import RecentActivity from "./components/RecentActivity";
 import StatusCards from "./components/StatusCards";
 import TodaysTasks from "./components/TodaysTasks";
 const Dashboard = () => {
+  const user = useUser();
+  console.log(user);
   return (
     <DashboardLayout className="grid grid-cols-3 gap-3 p-4 max-lg:flex max-lg:flex-col">
       <DashboardHero className="col-span-2" />
