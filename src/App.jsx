@@ -36,7 +36,7 @@ function App() {
           toastOptions={{
             style: {
               height: "50px",
-              fontSize: "18px",
+              fontSize: "14px",
               fontWeight: "bold",
             },
           }}
