@@ -7,7 +7,6 @@ import { FiLink } from "react-icons/fi";
 import { BsTelephone } from "react-icons/bs";
 import { FaGlobeAfrica, FaLinkedin } from "react-icons/fa";
 import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
-import Loading from "../../components/Layout/Loading";
 import { useUser } from "@clerk/react";
 
 const Profile = () => {

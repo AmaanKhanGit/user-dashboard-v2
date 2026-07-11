@@ -6,7 +6,6 @@ import QuickActions from "./components/QuickActions";
 import RecentActivity from "./components/RecentActivity";
 import StatusCards from "./components/StatusCards";
 import TodaysTasks from "./components/TodaysTasks";
-import Loading from "../../components/Layout/Loading";
 
 const Dashboard = () => {
   const { user } = useUser();
