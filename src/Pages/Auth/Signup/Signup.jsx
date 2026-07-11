@@ -1,6 +1,6 @@
 import { useClerk, useSignUp } from "@clerk/react";
 import { useState } from "react";
-import VerifyEmail from "./VerifyEmail";
+import VerifyEmail from "../components/VerifyEmail";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
@@ -8,8 +8,6 @@ import SignUpForm from "./SignUpForm";
 const Signup = () => {
   const { signUp, fetchStatus } = useSignUp();
   const navigate = useNavigate();
-
-  const { setActive } = useClerk();
 
   const [showVerificationScreen, setShowVerificationScreen] = useState(false);
   const [userEmail, setUserEmail] = useState("");
@@ -77,12 +75,34 @@ const Signup = () => {
     }
   };
 
+  const handleResend = async () => {
+    const { error } = await signUp.verifications.sendEmailCode();
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Verification code sent again!");
+    setTimer(30);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (timer === 0) {
+        return;
+      }
+      setTimer((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-purple-50 to-white px-4">
       {showVerificationScreen ? (
         <VerifyEmail
           email={userEmail}
           onSubmit={handleVerifyEmailSubmit}
+          onResend={handleResend}
           onBackClick={() => {
             setShowVerificationScreen(false);
             setUserEmail("");

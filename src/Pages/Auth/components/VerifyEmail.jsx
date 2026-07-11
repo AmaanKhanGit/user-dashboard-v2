@@ -3,12 +3,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { object, string } from "yup";
 import { Mail } from "lucide-react";
 import { useSignUp } from "@clerk/react";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { useState } from "react";
 
-const VerifyEmail = ({ email, onSubmit, onBackClick }) => {
+const VerifyEmail = ({ email, onSubmit, onBackClick, onResend, timer }) => {
   const { signUp } = useSignUp();
-  const [timer, setTimer] = useState(0);
 
   const verificationSchema = object({
     code: string()
@@ -17,27 +15,6 @@ const VerifyEmail = ({ email, onSubmit, onBackClick }) => {
       .max(6, "Code must be 6 digits")
       .matches(/^\d+$/, "Code must contain only numbers"),
   });
-
-  const handleResend = async () => {
-    const { error } = await signUp.verifications.sendEmailCode();
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-    toast.success("Verification code sent again!");
-    setTimer(30);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (timer === 0) {
-        return;
-      }
-      setTimer((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
@@ -48,7 +25,7 @@ const VerifyEmail = ({ email, onSubmit, onBackClick }) => {
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-bold text-gray-900">Verify Your Email</h1>
         <p className="mt-2 text-sm text-gray-600">
-          We sent a verification code to{" "}
+          We sent a verification code to
           <span className="font-semibold text-gray-900">{email}</span>
         </p>
       </div>
@@ -102,7 +79,7 @@ const VerifyEmail = ({ email, onSubmit, onBackClick }) => {
 
       <div className="mt-6 border-t border-gray-200 pt-6">
         <button
-          onClick={handleResend}
+          onClick={onResend}
           type="button"
           disabled={timer > 0}
           className="w-full cursor-pointer text-center text-sm font-semibold text-purple-600 outline-none hover:text-purple-700"

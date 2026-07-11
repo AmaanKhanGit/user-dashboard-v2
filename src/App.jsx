@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Signin from "./Pages/Auth/Signin/Signin";
 import Signup from "./Pages/Auth/Signup/Signup";
+import ResetPassword from "./Pages/Auth/components/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/sign-up",
     element: <Signup />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
   },
 ]);
 
