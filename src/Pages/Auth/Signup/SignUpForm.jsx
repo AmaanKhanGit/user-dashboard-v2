@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import { object, ref, string } from "yup";
 
-const signupSchema = object({
+const signupValidation = object({
   firstName: string().required("First Name is rquired"),
   lastName: string().required("Last Name is rquired too"),
   email: string()
@@ -35,7 +35,7 @@ const SignUpForm = ({ onSubmit, fetchStatus }) => {
           password: "",
           repeatPassword: "",
         }}
-        validationSchema={signupSchema}
+        validationSchema={signupValidation}
         onSubmit={onSubmit}
       >
         <Form className="space-y-5">
