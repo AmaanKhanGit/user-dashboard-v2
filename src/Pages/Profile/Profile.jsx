@@ -11,7 +11,7 @@ import Loading from "../../components/Layout/Loading";
 import { useUser } from "@clerk/react";
 
 const Profile = () => {
-  const { user, isLoaded } = useUser();
+  const { user } = useUser();
 
   const profileContent = [
     {
@@ -82,9 +82,6 @@ const Profile = () => {
     },
   ];
 
-  if (!isLoaded) {
-    return <Loading />;
-  }
   return (
     <DashboardLayout className="flex flex-col gap-3 px-4 py-4 lg:grid lg:grid-cols-2">
       <ProfileHero className="col-span-2" />

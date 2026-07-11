@@ -1,5 +1,5 @@
-import { useClerk, useSignUp } from "@clerk/react";
-import { useState } from "react";
+import { useSignUp } from "@clerk/react";
+import { useEffect, useState } from "react";
 import VerifyEmail from "../components/VerifyEmail";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";

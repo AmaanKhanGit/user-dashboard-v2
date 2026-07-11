@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import VerifyEmail from "../components/VerifyEmail";
 import SignInForm from "./SignInForm";
+import SocialLogins from "../components/SocialLogins";
 
 const Signin = () => {
   const { signIn, fetchStatus } = useSignIn();
@@ -100,6 +101,7 @@ const Signin = () => {
             fetchStatus={fetchStatus}
           />
         )}
+        <SocialLogins  />
       </AuthCard>
     </FormLayout>
   );

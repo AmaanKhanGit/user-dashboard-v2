@@ -9,11 +9,8 @@ import TodaysTasks from "./components/TodaysTasks";
 import Loading from "../../components/Layout/Loading";
 
 const Dashboard = () => {
-  const { isLoaded, user } = useUser();
-  console.log(user, isLoaded);
-  if (!isLoaded) {
-    return <Loading />;
-  }
+  const { user } = useUser();
+
   return (
     <DashboardLayout className="grid grid-cols-3 gap-3 p-4 max-lg:flex max-lg:flex-col">
       <DashboardHero className="col-span-2" />
