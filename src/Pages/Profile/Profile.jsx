@@ -7,8 +7,12 @@ import { FiLink } from "react-icons/fi";
 import { BsTelephone } from "react-icons/bs";
 import { FaGlobeAfrica, FaLinkedin } from "react-icons/fa";
 import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
+import Loading from "../../components/Layout/Loading";
+import { useUser } from "@clerk/react";
 
 const Profile = () => {
+  const { user, isLoaded } = useUser();
+
   const profileContent = [
     {
       title: "About Me",
@@ -77,6 +81,10 @@ const Profile = () => {
       password: "********",
     },
   ];
+
+  if (!isLoaded) {
+    return <Loading />;
+  }
   return (
     <DashboardLayout className="flex flex-col gap-3 px-4 py-4 lg:grid lg:grid-cols-2">
       <ProfileHero className="col-span-2" />
