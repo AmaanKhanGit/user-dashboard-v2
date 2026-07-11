@@ -1,6 +1,7 @@
 import Button from "../../../components/Layout/Button";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { object, string } from "yup";
+import { Link } from "react-router-dom";
+import { object, ref, string } from "yup";
 
 const signupSchema = object({
   firstName: string().required("First Name is rquired"),
@@ -11,6 +12,9 @@ const signupSchema = object({
   password: string()
     .min(8, "password must have atleast 8 characters")
     .required("Password is required"),
+  repeatPassword: string()
+    .required("please confirm your password")
+    .oneOf([ref("password")], "password must match"),
 });
 
 const SignUpForm = ({ onSubmit, fetchStatus }) => {
@@ -29,6 +33,7 @@ const SignUpForm = ({ onSubmit, fetchStatus }) => {
           lastName: "",
           email: "",
           password: "",
+          repeatPassword: "",
         }}
         validationSchema={signupSchema}
         onSubmit={onSubmit}
@@ -115,6 +120,26 @@ const SignUpForm = ({ onSubmit, fetchStatus }) => {
               )}
             </ErrorMessage>
           </div>
+          <div>
+            <label
+              htmlFor="repeatPassword"
+              className="block text-sm font-semibold text-gray-700"
+            >
+              Repeat Password
+            </label>
+            <Field
+              id="repeatPassword"
+              name="repeatPassword"
+              type="password"
+              placeholder="••••••••"
+              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+            />
+            <ErrorMessage name="repeatPassword">
+              {(msg) => (
+                <p className="mt-1 text-sm font-medium text-red-600">{msg}</p>
+              )}
+            </ErrorMessage>
+          </div>
 
           {/* clerk captcha widget */}
           <div
@@ -134,12 +159,12 @@ const SignUpForm = ({ onSubmit, fetchStatus }) => {
 
           <p className="text-center text-sm text-gray-600">
             Already have an account?
-            <a
-              href="#"
+            <Link
+              to="/sign-in"
               className="font-semibold text-purple-600 hover:text-purple-700"
             >
               Sign up
-            </a>
+            </Link>
           </p>
         </Form>
       </Formik>
