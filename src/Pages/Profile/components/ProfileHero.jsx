@@ -7,6 +7,7 @@ import {
   FaGlobeAfrica,
   FaLinkedin,
 } from "react-icons/fa";
+import { useUser } from "@clerk/react";
 
 const ProfileHero = ({ className }) => {
   const socialLinks = [
@@ -15,6 +16,10 @@ const ProfileHero = ({ className }) => {
     { icon: FaGlobeAfrica, link: "" },
     { icon: FaInstagram, link: "" },
   ];
+
+  const { user } = useUser();
+
+  const joinedDate = new Date(user.createdAt).toDateString();
 
   return (
     <div
@@ -25,18 +30,22 @@ const ProfileHero = ({ className }) => {
         <div className="flex items-center gap-6">
           <img
             className="h-32 w-32 rounded-full border-4 border-white bg-gray-200 object-cover shadow-sm"
-            src="/profilePhoto.png"
+            src={user.imageUrl}
             alt="profile"
           />
 
           <div className="space-y-1">
-            <h2 className="text-3xl font-bold text-gray-900">John Doe</h2>
+            <h2 className="text-3xl font-bold text-gray-900">
+              {user.fullName}
+            </h2>
 
             <p className="text-lg font-medium text-gray-700">
               Frontend Developer
             </p>
 
-            <p className="text-base text-gray-500">john@example.com</p>
+            <p className="text-base text-gray-500">
+              {user.emailAddresses[0].emailAddress}
+            </p>
           </div>
         </div>
 
@@ -53,7 +62,7 @@ const ProfileHero = ({ className }) => {
 
             <div className="flex items-center gap-2">
               <CalendarDays size={18} />
-              <span>Joined July 2026</span>
+              <span>Joined at {joinedDate}</span>
             </div>
           </div>
         </div>

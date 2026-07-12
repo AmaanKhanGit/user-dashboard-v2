@@ -6,42 +6,46 @@ import { BsTelephone } from "react-icons/bs";
 import { FaGlobeAfrica, FaLinkedin } from "react-icons/fa";
 import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import Button from "../../../components/Layout/Button";
+import { useUser } from "@clerk/react";
 
 const PersonalInfo = ({ className }) => {
+  const { user } = useUser();
+
   const details = [
     {
       icon: FaRegUser,
       title: "Full Name",
-      desc: "John Doe",
+      desc: user.fullName,
     },
     {
       icon: IoMailOutline,
       title: "Email",
-      desc: "john@example.com",
+      desc: user.emailAddresses[0].emailAddress,
     },
     {
       icon: BsTelephone,
       title: "Phone",
-      desc: "+91 123 456",
+      desc: user.phoneNumbers,
     },
 
     {
       icon: FiLink,
       title: "Website",
-      desc: "https://johndoe.dev",
+      desc: "",
     },
     {
       icon: IoLocationOutline,
       title: "Location",
-      desc: "New Delhi, India",
+      desc: "",
     },
     ,
     {
       icon: SlCalender,
       title: "Joined",
-      desc: "July 2026",
+      desc: user.createdAt.toDateString(),
     },
   ];
+
   return (
     <section className={`sections flex flex-col gap-2 ${className}`}>
       <div className="flex justify-between">
@@ -65,7 +69,7 @@ const PersonalInfo = ({ className }) => {
                     {info.title}
                   </p>
                   <p className="text-sm font-medium text-gray-600">
-                    {info.desc}
+                    {info.desc.length > 0 ? info.desc : "Not Added"}
                   </p>
                 </div>
               </div>
@@ -73,6 +77,7 @@ const PersonalInfo = ({ className }) => {
           })}
         </div>
       </div>
+      <hr className="text-gray-300"/>
       <div className="mt-3">
         <h2 className="text-xl font-bold">Security</h2>
         <div className="flex justify-between">
