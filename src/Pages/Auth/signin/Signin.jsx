@@ -14,8 +14,6 @@ const Signin = () => {
   const [timer, setTimer] = useState(0);
   const navigate = useNavigate();
 
-  console.log(signIn);
-
   const handleSignIn = async (val) => {
     const { email, password } = val;
     try {
@@ -29,9 +27,9 @@ const Signin = () => {
         return;
       }
       if (signIn.status === "complete") {
-        signIn.finalize();
-        toast.success("Welcome to dashboard");
+        await signIn.finalize();
         navigate("/");
+        toast.success("Welcome to dashboard");
       }
     } catch (error) {
       console.error(error);
@@ -62,8 +60,6 @@ const Signin = () => {
       toast.error(toast.error);
       return;
     }
-
-    console.log("code submitted successfylly");
 
     navigate("/reset-password");
   };
@@ -101,7 +97,7 @@ const Signin = () => {
             fetchStatus={fetchStatus}
           />
         )}
-        <SocialLogins  />
+        <SocialLogins />
       </AuthCard>
     </FormLayout>
   );

@@ -1,14 +1,4 @@
-import { MdEdit } from "react-icons/md";
-import Button from "../../../components/Layout/Button";
-import { Plus } from "lucide-react";
-
-const ProfileCards = ({ content }) => {
-  //& Reusing one component for multiple profile sections.
-  //& Future me agar complexity badhi to isko split kar sakte hain 😄
-
-  return (
-    <section className="sections flex flex-col gap-2">
-      <div className="flex justify-between">
+  <div className="flex justify-between">
         <h2 className="text-xl font-bold">
           {content.title || content.socialLinks}
         </h2>
@@ -90,8 +80,3 @@ const ProfileCards = ({ content }) => {
           </div>
         </div>
       )}
-    </section>
-  );
-};
-
-export default ProfileCards;

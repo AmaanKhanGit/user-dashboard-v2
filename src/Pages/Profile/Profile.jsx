@@ -1,5 +1,4 @@
 import DashboardLayout from "../../components/DashboardLayout";
-import ProfileCards from "./components/ProfileCards";
 import ProfileHero from "./components/ProfileHero";
 import { FaGithub, FaInstagram, FaRegUser } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
@@ -11,6 +10,8 @@ import { useUser } from "@clerk/react";
 import { useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
+import AboutMe from "./components/AboutMe";
+import Skills from "./components/Skills";
 
 const Profile = () => {
   const { user } = useUser();
@@ -102,15 +103,8 @@ const Profile = () => {
   return (
     <DashboardLayout className="flex flex-col gap-3 px-4 py-4 lg:grid lg:grid-cols-2">
       <ProfileHero className="col-span-2" />
-
-      {/*//& Maximum component reuse ahead 😄 */}
-      {/* //& DRY mode: ON 😅 */}
-      {profileContent.map((content) => (
-        <ProfileCards
-          key={content.title || content?.socialLinks}
-          content={content}
-        />
-      ))}
+      <AboutMe />
+      <Skills />
     </DashboardLayout>
   );
 };

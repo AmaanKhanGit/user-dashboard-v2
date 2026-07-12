@@ -60,6 +60,7 @@ function App() {
   if (!isLoaded) {
     return <Loading />;
   }
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
