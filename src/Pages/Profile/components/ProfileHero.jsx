@@ -1,8 +1,21 @@
 import { FaEdit } from "react-icons/fa";
 import Button from "../../../components/Layout/Button";
 import { CalendarDays, Circle, CircleCheckBig, MapPin } from "lucide-react";
+import {
+  FaGithub,
+  FaInstagram,
+  FaGlobeAfrica,
+  FaLinkedin,
+} from "react-icons/fa";
 
 const ProfileHero = ({ className }) => {
+  const socialLinks = [
+    { icon: FaGithub, link: "" },
+    { icon: FaLinkedin, link: "" },
+    { icon: FaGlobeAfrica, link: "" },
+    { icon: FaInstagram, link: "" },
+  ];
+
   return (
     <div
       className={`grid gap-10 bg-transparent py-6 lg:grid-cols-[1fr_320px] lg:px-10 ${className}`}
@@ -43,6 +56,23 @@ const ProfileHero = ({ className }) => {
               <span>Joined July 2026</span>
             </div>
           </div>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          {socialLinks.length ? (
+            // Icons
+            socialLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <a href={link.link} key={link.icon} target="_blank">
+                  <Icon size={22} />
+                </a>
+              );
+            })
+          ) : (
+            <button className="font-medium text-violet-600">
+              + Add Social Links
+            </button>
+          )}
         </div>
       </div>
 

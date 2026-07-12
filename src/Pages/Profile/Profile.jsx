@@ -12,6 +12,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import AboutMe from "./components/AboutMe";
 import Skills from "./components/Skills";
+import PersonalInfo from "./components/PersonalInfo";
 
 const Profile = () => {
   const { user } = useUser();
@@ -74,11 +75,11 @@ const Profile = () => {
     },
     {
       socialLinks: "Social Links",
-      links: [
-        { name: "GitHUb", icon: FaGithub },
-        { name: "LinkedIn", icon: FaLinkedin },
-        { name: "Portfolio", icon: FaGlobeAfrica },
-        { name: "Instagram", icon: FaInstagram },
+      socialLinks: [
+        { icon: FaGithub },
+        { icon: FaLinkedin },
+        { icon: FaGlobeAfrica },
+        { icon: FaInstagram },
       ],
       security: "Security",
       password: "********",
@@ -104,6 +105,7 @@ const Profile = () => {
     <DashboardLayout className="flex flex-col gap-3 px-4 py-4 lg:grid lg:grid-cols-2">
       <ProfileHero className="col-span-2" />
       <AboutMe />
+      <PersonalInfo className="row-span-2" />
       <Skills />
     </DashboardLayout>
   );
