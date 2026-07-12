@@ -9,6 +9,8 @@ import TodaysTasks from "./components/TodaysTasks";
 
 const Dashboard = () => {
   const { user } = useUser();
+  console.log(user);
+  console.log(user.id);
 
   return (
     <DashboardLayout className="grid grid-cols-3 gap-3 p-4 max-lg:flex max-lg:flex-col">

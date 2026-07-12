@@ -8,6 +8,9 @@ import { BsTelephone } from "react-icons/bs";
 import { FaGlobeAfrica, FaLinkedin } from "react-icons/fa";
 import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import { useUser } from "@clerk/react";
+import { useEffect } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 
 const Profile = () => {
   const { user } = useUser();
@@ -81,6 +84,21 @@ const Profile = () => {
     },
   ];
 
+  useEffect(() => {
+    const userRef = collection(db, "users_collection_786");
+
+    const unsubscribe = onSnapshot(userRef, (snapshot) => {
+      const users = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      console.log(users);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <DashboardLayout className="flex flex-col gap-3 px-4 py-4 lg:grid lg:grid-cols-2">
       <ProfileHero className="col-span-2" />
@@ -88,7 +106,10 @@ const Profile = () => {
       {/*//& Maximum component reuse ahead 😄 */}
       {/* //& DRY mode: ON 😅 */}
       {profileContent.map((content) => (
-        <ProfileCards key={content.title} content={content} />
+        <ProfileCards
+          key={content.title || content?.socialLinks}
+          content={content}
+        />
       ))}
     </DashboardLayout>
   );
