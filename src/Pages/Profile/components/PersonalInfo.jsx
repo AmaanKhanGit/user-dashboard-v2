@@ -1,9 +1,8 @@
 import { MdEdit } from "react-icons/md";
-import { FaGithub, FaInstagram, FaRegUser } from "react-icons/fa6";
+import { FaRegUser } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
 import { FiLink } from "react-icons/fi";
 import { BsTelephone } from "react-icons/bs";
-import { FaGlobeAfrica, FaLinkedin } from "react-icons/fa";
 import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import Button from "../../../components/Layout/Button";
 import { useUser } from "@clerk/react";
@@ -31,12 +30,12 @@ const PersonalInfo = ({ className }) => {
     {
       icon: FiLink,
       title: "Website",
-      desc: "",
+      desc: user.unsafeMetadata.website,
     },
     {
       icon: IoLocationOutline,
       title: "Location",
-      desc: "",
+      desc: user.unsafeMetadata.location,
     },
     ,
     {
@@ -77,7 +76,7 @@ const PersonalInfo = ({ className }) => {
           })}
         </div>
       </div>
-      <hr className="text-gray-300"/>
+      <hr className="text-gray-300" />
       <div className="mt-3">
         <h2 className="text-xl font-bold">Security</h2>
         <div className="flex justify-between">

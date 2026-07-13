@@ -11,6 +11,9 @@ const Signup = () => {
 
   const [showVerificationScreen, setShowVerificationScreen] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [timer, setTimer] = useState(0);
+
+  // & create a signup attempt with enail verification
 
   const handleSignUpSubmit = async (val) => {
     const { firstName, lastName, email, password } = val;
@@ -41,6 +44,8 @@ const Signup = () => {
       toast.error(err.errors?.[0]?.message || "Something went wrong");
     }
   };
+
+  // & verify the code entered by user
 
   const handleVerifyEmailSubmit = async (values) => {
     try {
@@ -74,6 +79,8 @@ const Signup = () => {
       console.error("Verification error:", error);
     }
   };
+
+  // & handle code resend
 
   const handleResend = async () => {
     const { error } = await signUp.verifications.sendEmailCode();

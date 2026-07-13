@@ -1,7 +1,9 @@
 import { FaPlus } from "react-icons/fa";
 import Button from "../../../components/Layout/Button";
 import { CgNotes } from "react-icons/cg";
+import { useUser } from "@clerk/react";
 const DashboardHero = ({ className }) => {
+  const { user } = useUser();
   return (
     <section
       className={`sections flex justify-between max-md:flex-col ${className}`}
@@ -9,7 +11,7 @@ const DashboardHero = ({ className }) => {
       <div className="flex flex-col gap-5">
         <h1 className="text-3xl font-bold">
           <div>Good Morning,</div>
-          <div className="text-purple-700">Username</div>
+          <div className="text-purple-700">{user.fullName}</div>
         </h1>
         <p className="text-lg text-gray-400">Jun 02, 2026 Saturday</p>
         <p className="text-lg text-gray-400">

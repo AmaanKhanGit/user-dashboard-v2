@@ -1,8 +1,8 @@
 import Button from "../../../components/Layout/Button";
 
-const ProductivityGraph = () => {
+const ProductivityGraph = ({ className }) => {
   return (
-    <section className="sections flex flex-col gap-4">
+    <section className={`sections flex flex-col gap-4 ${className}`}>
       <div className="flex items-center justify-between">
         <h2 className="section-heading">Productivity Overview</h2>
         {/* <Button className="hollowBtn lg:px-1.5">This Week</Button>

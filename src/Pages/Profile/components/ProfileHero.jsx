@@ -10,14 +10,18 @@ import {
 import { useUser } from "@clerk/react";
 
 const ProfileHero = ({ className }) => {
-  const socialLinks = [
-    { icon: FaGithub, link: "" },
-    { icon: FaLinkedin, link: "" },
-    { icon: FaGlobeAfrica, link: "" },
-    { icon: FaInstagram, link: "" },
+  const { user } = useUser();
+
+  const allSocialLinks = [
+    { icon: FaGithub, link: user.unsafeMetadata.github },
+    { icon: FaLinkedin, link: user.unsafeMetadata.linkedin },
+    { icon: FaGlobeAfrica, link: user.unsafeMetadata.website },
+    { icon: FaInstagram, link: user.unsafeMetadata.instagram },
   ];
 
-  const { user } = useUser();
+  const socialLinks = allSocialLinks.filter(
+    (item) => typeof item.link === "string" && item.link.trim() !== "",
+  );
 
   const joinedDate = new Date(user.createdAt).toDateString();
 
@@ -40,7 +44,7 @@ const ProfileHero = ({ className }) => {
             </h2>
 
             <p className="text-lg font-medium text-gray-700">
-              Frontend Developer
+              {user.unsafeMetadata.profession || ""}
             </p>
 
             <p className="text-base text-gray-500">
@@ -50,14 +54,14 @@ const ProfileHero = ({ className }) => {
         </div>
 
         <div className="space-y-4">
-          <p className="max-w-2xl text-lg text-gray-700">
-            Building beautiful web experiences one component at a time.
+          <p className="max-w-2xl text-lg font-semibold text-gray-700">
+            {user.unsafeMetadata.bio || "No bio added"}
           </p>
 
           <div className="space-y-2 text-gray-600">
             <div className="flex items-center gap-2">
               <MapPin size={18} />
-              <span>New Delhi, India</span>
+              <span>{user.unsafeMetadata.location || "where do you live"}</span>
             </div>
 
             <div className="flex items-center gap-2">
@@ -67,19 +71,24 @@ const ProfileHero = ({ className }) => {
           </div>
         </div>
         <div className="flex flex-wrap gap-3">
-          {socialLinks.length ? (
-            // Icons
-            socialLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <a href={link.link} key={link.icon} target="_blank">
-                  <Icon size={22} />
-                </a>
-              );
-            })
-          ) : (
-            <button className="font-medium text-violet-600">
-              + Add Social Links
+          {socialLinks.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <a
+                key={item.link}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon size={22} />
+              </a>
+            );
+          })}
+
+          {socialLinks.length < allSocialLinks.length && (
+            <button className="cursor-pointer font-medium text-violet-600">
+              + Add Links
             </button>
           )}
         </div>

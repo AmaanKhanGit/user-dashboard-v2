@@ -2,12 +2,8 @@ import Button from "../../../components/Layout/Button";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { object, string } from "yup";
 import { Mail } from "lucide-react";
-import { useSignUp } from "@clerk/react";
-import { useState } from "react";
 
 const VerifyEmail = ({ email, onSubmit, onBackClick, onResend, timer }) => {
-  const { signUp } = useSignUp();
-
   const verificationSchema = object({
     code: string()
       .required("Verification code is required")
