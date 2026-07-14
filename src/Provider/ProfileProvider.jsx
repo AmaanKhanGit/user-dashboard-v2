@@ -10,6 +10,7 @@ const ProfileProvider = ({ children }) => {
   const editPersonalInfo = async ({
     fullName,
     phone,
+    bio,
     profession,
     location,
     website,
@@ -29,6 +30,7 @@ const ProfileProvider = ({ children }) => {
 
       await user.updateMetadata({
         unsafeMetadata: {
+          bio,
           profession,
           location,
           website,

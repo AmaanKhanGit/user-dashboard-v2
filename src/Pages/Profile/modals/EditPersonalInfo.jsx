@@ -21,6 +21,7 @@ const EditPersonalInfo = ({ setOpen }) => {
     <Formik
       initialValues={{
         fullName: user.fullName,
+        bio: user.unsafeMetadata.bio,
         profession: user.unsafeMetadata.profession,
         phone: user.phoneNumbers,
         email: user.emailAddresses,
@@ -30,7 +31,10 @@ const EditPersonalInfo = ({ setOpen }) => {
         linkedin: user.unsafeMetadata.linkedin,
         instagram: user.unsafeMetadata.instagram,
       }}
-      onSubmit={editPersonalInfo}
+      onSubmit={async (val) => {
+        await editPersonalInfo(val);
+        setOpen(false);
+      }}
     >
       <Form className="space-y-6">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -39,6 +43,12 @@ const EditPersonalInfo = ({ setOpen }) => {
             name="fullName"
             icon={User}
             placeholder="Enter your full name"
+          />
+          <FieldSet
+            label="Bio"
+            name="bio"
+            icon={BriefcaseBusiness}
+            placeholder="Add a bio"
           />
 
           <FieldSet

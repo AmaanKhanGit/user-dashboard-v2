@@ -13,7 +13,10 @@ const EditAbout = ({ setOpen }) => {
       initialValues={{
         about: user.unsafeMetadata.about,
       }}
-      onSubmit={editAbout}
+      onSubmit={async (val) => {
+        await editAbout(val);
+        setOpen(false);
+      }}
     >
       {({ values }) => (
         <Form className="space-y-6">
