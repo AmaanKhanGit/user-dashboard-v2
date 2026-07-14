@@ -83,7 +83,7 @@ const PersonalInfo = ({ className }) => {
           })}
         </div>
       </div>
-      <hr className="text-gray-300" />
+      <hr className="text-gray-200" />
       <div className="mt-3">
         <h2 className="text-xl font-bold">Security</h2>
         <div className="flex justify-between">
