@@ -217,7 +217,6 @@ const AuthProvider = ({ children }) => {
         handleSignUpSubmit,
         handleVerifyEmailSubmit,
         handleSignUpResend,
-        // expose status and UI state
         signInFetchStatus,
         signUpFetchStatus,
         showVerificationScreen,
