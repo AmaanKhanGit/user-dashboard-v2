@@ -1,11 +1,10 @@
-import { useSignIn } from "@clerk/react";
 import Button from "../../../components/Layout/Button";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { object, string, ref } from "yup";
 import FormLayout from "../../../components/FormLayout";
 import AuthCard from "../../../components/AuthCard";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const signInValidation = object({
   password: string()
@@ -17,32 +16,8 @@ const signInValidation = object({
 });
 
 const ResetPassword = () => {
-  const { signIn, fetchStatus } = useSignIn();
-  const navigate = useNavigate();
-
-  const handleResetPassword = async ({ password }) => {
-    const { error } = await signIn.resetPasswordEmailCode.submitPassword({
-      password: password,
-    });
-
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-
-    if (signIn.status === "complete") {
-      const { error } = await signIn.finalize();
-
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-
-      toast.success("Password reset successfully ,Welcome!");
-
-      navigate("/");
-    }
-  };
+  // AuthContext: use the password-reset handler from context here.
+  const { handleResetPassword, signInFetchStatus } = useContext(AuthContext);
 
   return (
     <FormLayout>
@@ -71,7 +46,7 @@ const ResetPassword = () => {
                 Password
               </label>
               <Field
-                disabled={fetchStatus === "fetching"}
+                disabled={signInFetchStatus === "fetching"}
                 name="password"
                 id="password"
                 type="password"
@@ -93,7 +68,7 @@ const ResetPassword = () => {
                 Repeat Password
               </label>
               <Field
-                disabled={fetchStatus === "fetching"}
+                disabled={signInFetchStatus === "fetching"}
                 name="repeatPassword"
                 id="repeatPassword"
                 type="password"
@@ -116,11 +91,13 @@ const ResetPassword = () => {
             />
 
             <Button
-              disabled={fetchStatus === "fetching"}
+              disabled={signInFetchStatus === "fetching"}
               type="submit"
               className="w-full"
             >
-              {fetchStatus === "fetching" ? "Submitting.." : "Reset Password"}
+              {signInFetchStatus === "fetching"
+                ? "Submitting.."
+                : "Reset Password"}
             </Button>
           </Form>
         </Formik>

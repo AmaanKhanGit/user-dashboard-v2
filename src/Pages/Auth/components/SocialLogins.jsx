@@ -1,22 +1,10 @@
-import { useSignIn } from "@clerk/react";
-import toast from "react-hot-toast";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa6";
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const SocialLogins = () => {
-  const { signIn } = useSignIn();
-
-  const handleSocialLogin = async (appName) => {
-    const { error } = await signIn.sso({
-      strategy: appName,
-      redirectCallbackUrl: "/sso-callback",
-      redirectUrl: "/", //& can use sign-in/tasks according to docs it assums that you'll do more tasks between
-    });
-
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-  };
+  // AuthContext: use the social login handler from context here.
+  const { handleSocialLogin } = useContext(AuthContext);
 
   return (
     <div className="social-logins flex w-full flex-col gap-3">

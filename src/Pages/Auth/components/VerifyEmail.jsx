@@ -2,15 +2,17 @@ import Button from "../../../components/Layout/Button";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { object, string } from "yup";
 import { Mail } from "lucide-react";
+// This component receives `onSubmit` and `onResend` from its parent; no direct context needed here.
+const verificationSchema = object({
+  code: string()
+    .required("Verification code is required")
+    .min(6, "Code must be 6 digits")
+    .max(6, "Code must be 6 digits")
+    .matches(/^\d+$/, "Code must contain only numbers"),
+});
 
-const VerifyEmail = ({ email, onSubmit, onBackClick, onResend, timer }) => {
-  const verificationSchema = object({
-    code: string()
-      .required("Verification code is required")
-      .min(6, "Code must be 6 digits")
-      .max(6, "Code must be 6 digits")
-      .matches(/^\d+$/, "Code must contain only numbers"),
-  });
+const VerifyEmail = ({ email, onBackClick, timer, onSubmit, onResend }) => {
+  // AuthContext: pass the verification submit and resend handlers from context into this component.
 
   return (
     <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">

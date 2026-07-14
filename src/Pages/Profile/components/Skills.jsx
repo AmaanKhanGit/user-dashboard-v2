@@ -1,8 +1,13 @@
 import { MdEdit } from "react-icons/md";
 import Button from "../../../components/Layout/Button";
 import EmptyState from "./EmptyState";
+import EditModal from "./EditModal";
+import EditSkills from "../modals/EditSkills";
+import { useState } from "react";
 
 const Skills = () => {
+  const [isOpen, setOpen] = useState(false);
+
   const skills = [
     // "React",
     // "Next.js",
@@ -17,7 +22,10 @@ const Skills = () => {
     <section className="sections flex flex-col gap-2">
       <div className="flex justify-between">
         <h2 className="text-xl font-bold"> Skills</h2>
-        <Button className="hollowBtn flex items-center gap-2 border-none bg-gray-100">
+        <Button
+          onClick={() => setOpen(true)}
+          className="hollowBtn flex items-center gap-2 border-none bg-gray-100"
+        >
           <MdEdit />
           Edit
         </Button>
@@ -38,12 +46,16 @@ const Skills = () => {
           </div>
         ) : (
           <EmptyState
+            setOpen={setOpen}
             title="No skills added yet"
             desc="Showcase your technical skills to complete your profile."
             buttonText="Add Skills"
           />
         )}
       </div>
+      <EditModal open={isOpen} setOpen={setOpen} title="Edit Skills">
+        <EditSkills setOpen={setOpen} />
+      </EditModal>
     </section>
   );
 };

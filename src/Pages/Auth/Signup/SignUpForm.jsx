@@ -1,5 +1,7 @@
+import { AuthContext } from "../../../Provider/AuthProvider";
 import Button from "../../../components/Layout/Button";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { object, ref, string } from "yup";
 
@@ -17,7 +19,11 @@ const signupValidation = object({
     .oneOf([ref("password")], "password must match"),
 });
 
-const SignUpForm = ({ onSubmit, fetchStatus }) => {
+const SignUpForm = ({ fetchStatus }) => {
+  // AuthContext: use handleSignUpSubmit here as the submit handler for this form.
+
+  const { handleSignUpSubmit } = useContext(AuthContext);
+
   return (
     <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
       <div className="mb-8 text-center">
@@ -36,7 +42,7 @@ const SignUpForm = ({ onSubmit, fetchStatus }) => {
           repeatPassword: "",
         }}
         validationSchema={signupValidation}
-        onSubmit={onSubmit}
+        onSubmit={handleSignUpSubmit}
       >
         <Form className="space-y-5">
           <div>

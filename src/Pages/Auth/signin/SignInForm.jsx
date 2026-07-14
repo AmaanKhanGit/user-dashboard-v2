@@ -1,6 +1,8 @@
 import Button from "../../../components/Layout/Button";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
 import { object, string } from "yup";
 
 const signInValidation = object({
@@ -12,7 +14,10 @@ const signInValidation = object({
     .required("password is required"),
 });
 
-const SignInForm = ({ onSubmit, onForgot, fetchStatus }) => {
+const SignInForm = ({ fetchStatus, onForgot }) => {
+  // Uses AuthContext handlers for submit and forgot password.
+  const { handleSignInSubmit, handleForgot } = useContext(AuthContext);
+
   return (
     <>
       <div className="text-center">
@@ -28,7 +33,7 @@ const SignInForm = ({ onSubmit, onForgot, fetchStatus }) => {
         }}
 
         validationSchema={signInValidation}
-        onSubmit={onSubmit}
+        onSubmit={handleSignInSubmit}
       >
         <Form className="space-y-5">
           <div>
@@ -76,7 +81,7 @@ const SignInForm = ({ onSubmit, onForgot, fetchStatus }) => {
           </div>
 
           <p
-            onClick={onForgot}
+            onClick={onForgot ?? handleForgot}
             className="text-end text-sm font-semibold text-purple-600 hover:text-purple-700"
           >
             Forgot password?

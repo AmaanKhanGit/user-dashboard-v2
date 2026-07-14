@@ -7,6 +7,8 @@ import {
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import Button from "./Layout/Button";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const links = [
   {
@@ -26,9 +28,8 @@ const Sidebar = ({ onClose, className }) => {
     onClose?.();
   };
 
-  const handleLogout = ()=>{
-    console.log("Logout")
-  }
+  // AuthContext: use the logout action from context here.
+  const { handleLogout } = useContext(AuthContext);
 
   return (
     <aside className={className}>

@@ -10,47 +10,53 @@ import ProtectAuth from "./ProtectedRoute/ProtectAuth";
 import ProtectApp from "./ProtectedRoute/ProtectApp";
 import { useAuth } from "@clerk/react";
 import Loading from "./components/Layout/Loading";
+import RootLayout from "./components/RootLayout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: (
-      <ProtectApp>
-        <Dashboard />
-      </ProtectApp>
-    ),
-  },
-  {
-    path: "/profile",
-    element: (
-      <ProtectApp>
-        <Profile />
-      </ProtectApp>
-    ),
-  },
-  {
-    path: "/sign-in",
-    element: (
-      <ProtectAuth>
-        <Signin />
-      </ProtectAuth>
-    ),
-  },
-  {
-    path: "/sign-up",
-    element: (
-      <ProtectAuth>
-        <Signup />
-      </ProtectAuth>
-    ),
-  },
-  {
-    path: "/reset-password",
-    element: (
-      <ProtectAuth>
-        <ResetPassword />
-      </ProtectAuth>
-    ),
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/",
+        element: (
+          <ProtectApp>
+            <Dashboard />
+          </ProtectApp>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <ProtectApp>
+            <Profile />
+          </ProtectApp>
+        ),
+      },
+      {
+        path: "/sign-in",
+        element: (
+          <ProtectAuth>
+            <Signin />
+          </ProtectAuth>
+        ),
+      },
+      {
+        path: "/sign-up",
+        element: (
+          <ProtectAuth>
+            <Signup />
+          </ProtectAuth>
+        ),
+      },
+      {
+        path: "/reset-password",
+        element: (
+          <ProtectAuth>
+            <ResetPassword />
+          </ProtectAuth>
+        ),
+      },
+    ],
   },
 ]);
 

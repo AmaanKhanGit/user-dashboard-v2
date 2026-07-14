@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import Button from "../../../components/Layout/Button";
 import { CalendarDays, Circle, CircleCheckBig, MapPin } from "lucide-react";
@@ -8,9 +9,12 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import { useUser } from "@clerk/react";
+import EditModal from "./EditModal";
+import EditPersonalInfo from "../modals/EditPersonalInfo";
 
 const ProfileHero = ({ className }) => {
   const { user } = useUser();
+  const [isOpen, setOpen] = useState(false);
 
   const allSocialLinks = [
     { icon: FaGithub, link: user.unsafeMetadata.github },
@@ -129,10 +133,21 @@ const ProfileHero = ({ className }) => {
           </div>
         </div>
 
-        <Button className="hollowBtn mt-8 flex w-full items-center justify-center gap-2">
+        <Button
+          className="hollowBtn mt-8 flex w-full items-center justify-center gap-2"
+          onClick={() => setOpen(true)}
+        >
           Edit Profile
           <FaEdit />
         </Button>
+
+        <EditModal
+          open={isOpen}
+          setOpen={setOpen}
+          title="Personal Inforamation"
+        >
+          <EditPersonalInfo setOpen={setOpen} />
+        </EditModal>
       </div>
     </div>
   );

@@ -6,9 +6,13 @@ import { BsTelephone } from "react-icons/bs";
 import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import Button from "../../../components/Layout/Button";
 import { useUser } from "@clerk/react";
+import EditModal from "./EditModal";
+import EditPersonalInfo from "../modals/EditPersonalInfo";
+import { useState } from "react";
 
 const PersonalInfo = ({ className }) => {
   const { user } = useUser();
+  const [isOpen, setOpen] = useState(false);
 
   const details = [
     {
@@ -49,7 +53,10 @@ const PersonalInfo = ({ className }) => {
     <section className={`sections flex flex-col gap-2 ${className}`}>
       <div className="flex justify-between">
         <h2 className="text-xl font-bold"> Personal Information</h2>
-        <Button className="hollowBtn flex items-center gap-2 border-none bg-gray-100">
+        <Button
+          onClick={() => setOpen(true)}
+          className="hollowBtn flex items-center gap-2 border-none bg-gray-100"
+        >
           <MdEdit />
           Edit
         </Button>
@@ -87,6 +94,10 @@ const PersonalInfo = ({ className }) => {
           <Button className="hollowBtn self-end">Change Password</Button>
         </div>
       </div>
+
+      <EditModal open={isOpen} setOpen={setOpen} title="Personal Inforamation">
+        <EditPersonalInfo setOpen={setOpen} />
+      </EditModal>
     </section>
   );
 };
