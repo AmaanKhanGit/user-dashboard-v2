@@ -4,20 +4,13 @@ import EmptyState from "./EmptyState";
 import EditModal from "./EditModal";
 import EditSkills from "../modals/EditSkills";
 import { useState } from "react";
+import { useUser } from "@clerk/react";
+import { Plus } from "lucide-react";
 
 const Skills = () => {
   const [isOpen, setOpen] = useState(false);
-
-  const skills = [
-    // "React",
-    // "Next.js",
-    // "Tailwind CSs",
-    // "javaScripts",
-    // "TypeScript",
-    // "Git",
-    // "Redux",
-    // "Firebase",
-  ];
+  const { user } = useUser();
+  const skills = user.unsafeMetadata.skills;
   return (
     <section className="sections flex flex-col gap-2">
       <div className="flex justify-between">
@@ -42,7 +35,10 @@ const Skills = () => {
               </span>
             ))}
 
-            <Plus className="cursor-pointer text-purple-600" />
+            <Plus
+              onClick={() => setOpen(true)}
+              className="cursor-pointer text-purple-600"
+            />
           </div>
         ) : (
           <EmptyState

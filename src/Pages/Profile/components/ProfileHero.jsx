@@ -91,7 +91,10 @@ const ProfileHero = ({ className }) => {
           })}
 
           {socialLinks.length < allSocialLinks.length && (
-            <button className="cursor-pointer font-medium text-violet-600">
+            <button
+              onClick={() => setOpen(true)}
+              className="cursor-pointer font-medium text-violet-600"
+            >
               + Add Links
             </button>
           )}

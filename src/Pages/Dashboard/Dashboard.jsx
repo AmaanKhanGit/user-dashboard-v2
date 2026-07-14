@@ -13,35 +13,28 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!isLoaded || !user) return;
-    const profileFields = [
-      "bio",
-      "profession",
-      "about",
-      "location",
-      "website",
-      "linkedin",
-      "instagram",
-      "github",
-    ];
+    const defaults = {
+      bio: "",
+      profession: "",
+      about: "",
+      location: "",
+      website: "",
+      linkedin: "",
+      instagram: "",
+      github: "",
+      skills: [],
+    };
 
-    const hasProfileMetadata = profileFields.every(
-      (field) => user.unsafeMetadata?.[field] !== undefined,
-    );
+    const metadata = {
+      ...defaults,
+      ...user.unsafeMetadata,
+    };
 
     const setData = async () => {
       try {
         if (!hasProfileMetadata) {
           await user.updateMetadata({
-            unsafeMetadata: {
-              bio: "",
-              profession: "",
-              about: "",
-              location: "",
-              website: "",
-              linkedin: "",
-              instagram: "",
-              github: "",
-            },
+            unsafeMetadata: metadata,
           });
         }
       } catch (error) {

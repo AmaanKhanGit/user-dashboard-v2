@@ -11,6 +11,7 @@ import ProtectApp from "./ProtectedRoute/ProtectApp";
 import { useAuth } from "@clerk/react";
 import Loading from "./components/Layout/Loading";
 import RootLayout from "./components/RootLayout";
+import ProfileProvider from "./Provider/ProfileProvider";
 
 const router = createBrowserRouter([
   {
@@ -27,9 +28,11 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          <ProtectApp>
-            <Profile />
-          </ProtectApp>
+          <ProfileProvider>
+            <ProtectApp>
+              <Profile />
+            </ProtectApp>
+          </ProfileProvider>
         ),
       },
       {

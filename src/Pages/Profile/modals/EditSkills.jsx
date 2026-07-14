@@ -1,17 +1,29 @@
 import { Field, Form, Formik } from "formik";
 import { Plus } from "lucide-react";
 import SkillChip from "./SkillChip";
+import { useContext } from "react";
+import { ProfileContext } from "../../../Provider/ProfileProvider";
+
+import { useUser } from "@clerk/react";
 
 const EditSkills = ({ setOpen }) => {
+  const { user } = useUser();
+  const { editSkills } = useContext(ProfileContext);
+
+  console.log(user.unsafeMetadata.skills);
+
   return (
     <Formik
       initialValues={{
         skill: "",
-        skills: ["React", "Firebase", "Tailwind CSS", "JavaScript"],
+        skills: user.unsafeMetadata.skills ?? [],
       }}
-      onSubmit={() => {}}
+      onSubmit={async (val) => {
+        await editSkills(val);
+        setOpen(false);
+      }}
     >
-      {({ values }) => (
+      {({ values, setFieldValue }) => (
         <Form className="space-y-6">
           {/* Add Skill */}
           <div>
@@ -27,8 +39,28 @@ const EditSkills = ({ setOpen }) => {
               />
 
               <button
+                onClick={() => {
+                  const skill = values.skill.trim();
+
+                  // Empty skill
+                  if (!skill) return;
+
+                  // Duplicate check (case insensitive)
+                  if (
+                    values.skills.some(
+                      (s) => s.toLowerCase() === skill.toLowerCase(),
+                    )
+                  )
+                    return;
+
+                  // Max limit
+                  if (values.skills.length >= 10) return;
+
+                  setFieldValue("skills", [...values.skills, skill]);
+                  setFieldValue("skill", "");
+                }}
                 type="button"
-                className="flex items-center justify-center gap-2 rounded-xl bg-violet-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-violet-700"
+                className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-violet-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-violet-700"
               >
                 <Plus size={18} />
                 Add Skill
@@ -43,9 +75,20 @@ const EditSkills = ({ setOpen }) => {
             </h3>
 
             <div className="flex flex-wrap gap-3">
-              {values.skills.map((skill) => (
-                <SkillChip key={skill} skill={skill} />
-              ))}
+              {values.skills.length > 0
+                ? values.skills.map((skill) => (
+                    <SkillChip
+                      key={skill}
+                      skill={skill}
+                      onRemove={() =>
+                        setFieldValue(
+                          "skills",
+                          values.skills.filter((s) => s !== skill),
+                        )
+                      }
+                    />
+                  ))
+                : "No skills added"}
             </div>
           </div>
 
@@ -54,14 +97,14 @@ const EditSkills = ({ setOpen }) => {
             <button
               onClick={() => setOpen(false)}
               type="button"
-              className="rounded-xl border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+              className="cursor-pointer rounded-xl border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="rounded-xl bg-violet-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-violet-700"
+              className="cursor-pointer rounded-xl bg-violet-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-violet-700"
             >
               Save Changes
             </button>

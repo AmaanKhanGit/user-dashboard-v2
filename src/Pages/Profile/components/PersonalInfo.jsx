@@ -26,17 +26,6 @@ const PersonalInfo = ({ className }) => {
       desc: user.emailAddresses[0].emailAddress,
     },
     {
-      icon: BsTelephone,
-      title: "Phone",
-      desc: user.phoneNumbers,
-    },
-
-    {
-      icon: FiLink,
-      title: "Website",
-      desc: user.unsafeMetadata.website,
-    },
-    {
       icon: IoLocationOutline,
       title: "Location",
       desc: user.unsafeMetadata.location,

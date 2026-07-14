@@ -9,26 +9,28 @@ import {
 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import FieldSet from "../components/FieldSet";
+import { useContext } from "react";
+import { ProfileContext } from "../../../Provider/ProfileProvider";
+import { useUser } from "@clerk/react";
 
 const EditPersonalInfo = ({ setOpen }) => {
-  const handleSubmit = (val) => {
-    console.log(val);
-  };
+  const { user } = useUser();
+  const { editPersonalInfo } = useContext(ProfileContext);
 
   return (
     <Formik
       initialValues={{
-        fullName: "",
-        profession: "",
-        phone: "",
-        email: "",
-        location: "",
-        website: "",
-        github: "",
-        linkedin: "",
-        instagram: "",
+        fullName: user.fullName,
+        profession: user.unsafeMetadata.profession,
+        phone: user.phoneNumbers,
+        email: user.emailAddresses,
+        location: user.unsafeMetadata.location,
+        website: user.unsafeMetadata.website,
+        github: user.unsafeMetadata.github,
+        linkedin: user.unsafeMetadata.linkedin,
+        instagram: user.unsafeMetadata.instagram,
       }}
-      onSubmit={handleSubmit}
+      onSubmit={editPersonalInfo}
     >
       <Form className="space-y-6">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -44,13 +46,6 @@ const EditPersonalInfo = ({ setOpen }) => {
             name="profession"
             icon={BriefcaseBusiness}
             placeholder="Frontend Developer"
-          />
-
-          <FieldSet
-            label="Phone Number"
-            name="phone"
-            icon={Phone}
-            placeholder="+91 9876543210"
           />
 
           <FieldSet
@@ -89,14 +84,12 @@ const EditPersonalInfo = ({ setOpen }) => {
             placeholder="https://linkedin.com/in/username"
           />
 
-          <div className="md:col-span-2">
-            <FieldSet
-              label="Instagram"
-              name="instagram"
-              icon={FaInstagram}
-              placeholder="https://instagram.com/username"
-            />
-          </div>
+          <FieldSet
+            label="Instagram"
+            name="instagram"
+            icon={FaInstagram}
+            placeholder="https://instagram.com/username"
+          />
         </div>
 
         <div className="flex justify-end gap-3 border-t border-gray-200 pt-5">

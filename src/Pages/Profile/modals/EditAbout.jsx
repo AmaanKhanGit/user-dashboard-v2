@@ -1,13 +1,19 @@
+import { useUser } from "@clerk/react";
+import { ProfileContext } from "../../../Provider/ProfileProvider";
 import { Form, Formik, Field } from "formik";
+import { useContext } from "react";
 
 const EditAbout = ({ setOpen }) => {
+  const { user } = useUser();
+
+  const { editAbout } = useContext(ProfileContext);
+
   return (
     <Formik
       initialValues={{
-        about:
-          "Frontend developer passionate about building modern, responsive, and user-friendly web applications.",
+        about: user.unsafeMetadata.about,
       }}
-      onSubmit={() => {}}
+      onSubmit={editAbout}
     >
       {({ values }) => (
         <Form className="space-y-6">
