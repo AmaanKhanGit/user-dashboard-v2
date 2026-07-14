@@ -7,7 +7,9 @@ const Topnav = ({ onClose }) => {
   return (
     <div className="sticky top-0 z-20 h-16 bg-white shadow">
       <div className="myContainer flex items-center justify-between px-10 py-4">
-        <div className="text-2xl font-bold text-purple-700">Username</div>
+        <div className="text-2xl font-bold text-purple-700">
+          Task Managemant
+        </div>
 
         <FaBars
           onClick={onClose}
