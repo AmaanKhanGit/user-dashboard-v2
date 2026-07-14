@@ -11,6 +11,8 @@ import { useEffect } from "react";
 const Dashboard = () => {
   const { user, isLoaded } = useUser();
 
+  console.log(user.unsafeMetadata);
+
   useEffect(() => {
     if (!isLoaded || !user) return;
     const defaults = {
@@ -32,11 +34,9 @@ const Dashboard = () => {
 
     const setData = async () => {
       try {
-        if (!hasProfileMetadata) {
-          await user.updateMetadata({
-            unsafeMetadata: metadata,
-          });
-        }
+        await user.updateMetadata({
+          unsafeMetadata: metadata,
+        });
       } catch (error) {
         console.error(error);
       }
