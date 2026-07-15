@@ -1,34 +1,104 @@
 import { FaPlus } from "react-icons/fa";
 import Button from "../../../components/Layout/Button";
-import { CgNotes } from "react-icons/cg";
 import { useUser } from "@clerk/react";
+import { useContext, useState } from "react";
+import AddItemModal from "../modal/AddItemModal";
+import { DashboardContext } from "../../../Provider/DashboardProvider";
+
 const DashboardHero = ({ className }) => {
   const { user } = useUser();
+  const [isOpen, setOpen] = useState(false);
+  const [modalConfig, setModalConfig] = useState({
+    type: "",
+    title: "",
+    isDueDate: false,
+    onSubmit: null,
+  });
+  const [modalType, setModalType] = useState(null);
+
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  const hour = new Date().getHours();
+
+  const greeting =
+    hour < 12 ? "Good Morning" : hour < 17 ? "Good Afternoon" : "Good Evening";
+
+  const quotes = [
+    "Focus on progress, not perfection.",
+    "Small steps every day.",
+    "Stay consistent.",
+    "Done is better than perfect.",
+  ];
+
+  const [randQuote] = useState(
+    quotes[Math.floor(Math.random() * quotes.length)],
+  );
+
+  const { handleAddTask, handleAddNote } = useContext(DashboardContext);
+
+  const handleTaskOpen = () => {
+    setModalConfig({
+      type: "task",
+      title: "Create Task",
+      isDueDate: true,
+      onSubmit: handleAddTask,
+    });
+    setOpen(true);
+  };
+
+  const handleNoteOpen = () => {
+    setModalConfig({
+      type: "note",
+      title: "Add Note",
+      isDueDate: false,
+      onSubmit: handleAddNote,
+    });
+    setOpen(true);
+  };
   return (
     <section
       className={`sections flex justify-between max-md:flex-col ${className}`}
     >
       <div className="flex flex-col gap-5">
         <h1 className="text-3xl font-bold">
-          <div>Good Morning,</div>
+          <div>{greeting},</div>
           <div className="text-purple-700">{user.fullName}</div>
         </h1>
-        <p className="text-lg text-gray-400">Jun 02, 2026 Saturday</p>
-        <p className="text-lg text-gray-400">
-          Focus on progress not perfection <br /> Yor're doing great!
-        </p>
-        <div className="flex gap-3">
-          <Button className="flex shrink-0 items-center justify-center gap-2">
-            <FaPlus /> Create Task
+        <p className="text-lg text-gray-400">{today}</p>
+        <p className="text-lg text-gray-400">{randQuote}</p>
+        <div className="mt-5 flex gap-3">
+          <Button
+            onClick={handleTaskOpen}
+            className="flex shrink-0 items-center justify-center gap-2"
+          >
+            <FaPlus /> Task
           </Button>
-          <Button className="hollowBtn flex shrink-0 items-center justify-center gap-2">
-            <CgNotes /> View Tasks
+          <Button
+            onClick={handleNoteOpen}
+            className="hollowBtn flex shrink-0 items-center justify-center gap-2"
+          >
+            <FaPlus /> Note
           </Button>
         </div>
       </div>
       <div className="">
-        <img className="w-full" src="/dashboardHero.png" alt="dashboardHero" />
+        <img
+          className="h-64 object-contain"
+          src="/dashboardHero.png"
+          alt="dashboardHero"
+        />
       </div>
+      <AddItemModal
+        open={isOpen}
+        modalConfig={modalConfig}
+        onSubmit={modalConfig.type === "task" ? handleAddTask : handleAddNote}
+        onClose={() => setOpen(false)}
+      />
     </section>
   );
 };

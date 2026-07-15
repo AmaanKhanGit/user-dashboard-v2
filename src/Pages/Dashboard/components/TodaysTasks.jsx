@@ -6,20 +6,20 @@ const TodaysTasks = () => {
     {
       id: 101,
       title: "Create dashboard UI",
-      priority: "High",
       dueDate: "Due: Today, 11:43 AM",
       status: "Success",
+      preview: "Planning to create a portfolio with content management panel",
       colors: {
         priorityColor: "bg-red-50 text-red-600",
         statusColor: "bg-green-200 text-green-600",
       },
     },
     {
-      id: 102,
+      id: 106,
       title: "Solve Leetcode Probelem",
-      priority: "Medium",
       dueDate: "Due: Today, 09:10 PM",
       status: "Pending",
+      preview: "Planning to create a portfolio with content management panel",
       colors: {
         priorityColor: "bg-amber-50 text-amber-600",
         statusColor: "bg-amber-200 text-amber-600",
@@ -28,9 +28,9 @@ const TodaysTasks = () => {
     {
       id: 103,
       title: "Date a girl",
-      priority: "None",
       dueDate: "Due: Never",
       status: "Never",
+      preview: "Planning to create a portfolio with content management panel",
       colors: {
         priorityColor: "bg-red-50 text-red-600",
         statusColor: "bg-gray-200 text-gray-600",

@@ -12,6 +12,7 @@ import { useAuth } from "@clerk/react";
 import Loading from "./components/Layout/Loading";
 import RootLayout from "./components/RootLayout";
 import ProfileProvider from "./Provider/ProfileProvider";
+import DashboardProvider from "./Provider/DashboardProvider";
 
 const router = createBrowserRouter([
   {
@@ -20,9 +21,11 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: (
-          <ProtectApp>
-            <Dashboard />
-          </ProtectApp>
+          <DashboardProvider>
+            <ProtectApp>
+              <Dashboard />
+            </ProtectApp>
+          </DashboardProvider>
         ),
       },
       {

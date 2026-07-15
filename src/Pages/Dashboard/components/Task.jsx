@@ -1,6 +1,6 @@
 const Task = ({ task }) => {
   return (
-    <div className="flex items-start gap-4 rounded-xl border border-gray-200 p-3">
+    <div className="flex items-start gap-4 rounded-xl border border-gray-200 p-2">
       <input
         className="mt-1.5 scale-125"
         type="checkbox"
@@ -11,10 +11,8 @@ const Task = ({ task }) => {
       <div className="flex flex-1 justify-between">
         <div className="flex flex-col gap-1">
           <h3 className="text-sm font-bold">{task.title}</h3>
-          <p
-            className={`self-start rounded px-1.5 py-1 text-sm font-medium ${task.colors.priorityColor}`}
-          >
-            {task.priority}
+          <p className="mt-4 line-clamp-3 border-l-4 border-purple-200 pl-3 text-sm leading-6 text-gray-600">
+            {task.preview}
           </p>
           <p className="text-xs font-medium text-gray-400">{task.dueDate}</p>
         </div>

@@ -30,13 +30,7 @@ const RecentActivity = ({ className }) => {
       time: "3m ago",
       varient: variants.redVar,
     },
-    {
-      icon: CgLogIn,
-      title: "Logged In",
-      description: "You logged in succesfully",
-      time: "10h ago",
-      varient: variants.blueVar,
-    },
+  
   ];
 
   return (
