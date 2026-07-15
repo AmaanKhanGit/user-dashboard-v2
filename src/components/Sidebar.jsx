@@ -7,8 +7,9 @@ import {
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import Button from "./Layout/Button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import LogoutModal from "../Pages/Profile/modals/LogoutModal";
 
 const links = [
   {
@@ -24,11 +25,12 @@ const links = [
 ];
 
 const Sidebar = ({ onClose, className }) => {
+  const [isOpen, setOpen] = useState(false);
+
   const handleClick = () => {
     onClose?.();
   };
 
-  // AuthContext: use the logout action from context here.
   const { handleLogout } = useContext(AuthContext);
 
   return (
@@ -54,9 +56,17 @@ const Sidebar = ({ onClose, className }) => {
         })}
       </div>
 
-      <Button onClick={handleLogout} className="dangerBtn mt-auto">
+      <Button onClick={() => setOpen(true)} className="dangerBtn mt-auto">
         Logout
       </Button>
+
+      <LogoutModal
+        open={isOpen}
+        onClose={() => {
+          setOpen(false);
+        }}
+        onConfirm={handleLogout}
+      />
     </aside>
   );
 };
