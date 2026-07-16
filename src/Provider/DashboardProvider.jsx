@@ -12,7 +12,6 @@ const DashboardProvider = ({ children }) => {
   const handleAddTask = async (values) => {
     try {
       await addDoc(collection(db, "users", user.id, "tasks"), {
-        // ^ this will be my path
         title: values.name,
         content: values.content,
         dueDate: values.dueDate,
@@ -32,7 +31,6 @@ const DashboardProvider = ({ children }) => {
         title: values.name,
         content: values.content,
         createdAt: serverTimestamp(),
-        completed: false,
       });
 
       toast.success("Note added successfully!");
