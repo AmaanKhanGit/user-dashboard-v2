@@ -6,15 +6,15 @@ import Button from "./Layout/Button";
 const Topnav = ({ onClose }) => {
   return (
     <div className="sticky top-0 z-20 h-16 bg-white shadow">
-      <div className="myContainer flex items-center justify-between px-10 py-4">
-        <div className="text-2xl font-bold text-purple-700">
+      <div className="myContainer flex items-center justify-between px-3 py-4 sm:px-10">
+        <div className="flex items-center gap-2 text-2xl font-bold text-purple-700">
+          <FaBars
+            onClick={onClose}
+            className="cursor-pointer text-xl sm:hidden"
+          />{" "}
           Task Managemant
         </div>
 
-        <FaBars
-          onClick={onClose}
-          className="cursor-pointer text-xl sm:hidden"
-        />
         <div className="flex gap-3 text-xl sm:gap-6">
           {/* <FaMoon className="cursor-pointer" />
 
