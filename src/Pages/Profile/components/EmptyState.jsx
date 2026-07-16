@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 
-const EmptyState = ({ title, desc, buttonText, setOpen }) => {
+const EmptyState = ({ title, desc, setOpen }) => {
   return (
     <div className="flex items-center justify-between rounded-xl border border-dashed border-gray-300 bg-gray-50 px-4 py-4">
       <div>
@@ -13,7 +13,7 @@ const EmptyState = ({ title, desc, buttonText, setOpen }) => {
         className="flex cursor-pointer items-center gap-2 rounded-lg border border-purple-600 bg-white px-4 py-2 text-purple-600 transition hover:bg-purple-100"
       >
         <Plus size={18} />
-        {buttonText}
+        Add
       </button>
     </div>
   );

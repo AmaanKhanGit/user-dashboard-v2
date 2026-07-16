@@ -30,7 +30,6 @@ const AboutMe = () => {
             setOpen={setOpen}
             title="Nothing added about you"
             desc="Tell us about your self"
-            buttonText="Add About"
           />
         )}
       </div>

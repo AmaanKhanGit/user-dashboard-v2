@@ -45,7 +45,6 @@ const Skills = () => {
             setOpen={setOpen}
             title="No skills added yet"
             desc="Showcase your technical skills to complete your profile."
-            buttonText="Add Skills"
           />
         )}
       </div>
