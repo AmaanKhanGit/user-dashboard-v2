@@ -9,6 +9,8 @@ export const DashboardContext = createContext();
 const DashboardProvider = ({ children }) => {
   const { user } = useUser();
 
+  // & tasks
+
   const handleAddTask = async (values) => {
     try {
       await addDoc(collection(db, "users", user.id, "tasks"), {
@@ -25,6 +27,11 @@ const DashboardProvider = ({ children }) => {
     }
   };
 
+  const handkeUpdateTask = async (values) => {};
+
+  const handkeDeleteTask = async (values) => {};
+  // & notes
+
   const handleAddNote = async (values) => {
     try {
       await addDoc(collection(db, "users", user.id, "notes"), {
@@ -39,11 +46,19 @@ const DashboardProvider = ({ children }) => {
     }
   };
 
+  const handkeUpdateNote = async (values) => {};
+
+  const handkeDeleteNote = async (values) => {};
+
   return (
     <DashboardContext.Provider
       value={{
         handleAddTask,
         handleAddNote,
+        handkeUpdateTask,
+        handkeDeleteTask,
+        handkeUpdateNote,
+        handkeDeleteNote,
       }}
     >
       {children}
