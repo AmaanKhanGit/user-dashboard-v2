@@ -13,6 +13,7 @@ import Loading from "./components/Layout/Loading";
 import RootLayout from "./components/RootLayout";
 import ProfileProvider from "./Provider/ProfileProvider";
 import DashboardProvider from "./Provider/DashboardProvider";
+import Workspace from "./Pages/Wrokspace/Workspace";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,16 @@ const router = createBrowserRouter([
           <ProfileProvider>
             <ProtectApp>
               <Profile />
+            </ProtectApp>
+          </ProfileProvider>
+        ),
+      },
+      {
+        path: "/workspace",
+        element: (
+          <ProfileProvider>
+            <ProtectApp>
+              <Workspace />
             </ProtectApp>
           </ProfileProvider>
         ),
@@ -65,9 +76,9 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+const queryClient = new QueryClient();
 
 function App() {
-  const queryClient = new QueryClient();
   const { isLoaded } = useAuth();
   if (!isLoaded) {
     return <Loading />;
