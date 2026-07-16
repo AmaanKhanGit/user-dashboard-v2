@@ -10,6 +10,7 @@ import Button from "./Layout/Button";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import LogoutModal from "../Pages/Profile/modals/LogoutModal";
+import { BsPersonWorkspace } from "react-icons/bs";
 
 const links = [
   {
@@ -21,6 +22,11 @@ const links = [
     title: "Profile",
     icon: FaUser,
     route: "/profile",
+  },
+  {
+    title: "Workspace",
+    icon: BsPersonWorkspace,
+    route: "/workspace",
   },
 ];
 
