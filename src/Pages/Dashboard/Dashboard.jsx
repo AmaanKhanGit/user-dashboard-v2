@@ -14,26 +14,6 @@ const Dashboard = () => {
   const { user, isLoaded } = useUser();
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const snapshot = await getDocs(
-          collection(db, "users", user.id, "notes"),
-        );
-        const notes = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        console.log(notes);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getData();
-  }, []);
-
-  useEffect(() => {
     if (!isLoaded || !user || user.unsafeMetadata.firstLogin) return;
 
     const defaults = {
