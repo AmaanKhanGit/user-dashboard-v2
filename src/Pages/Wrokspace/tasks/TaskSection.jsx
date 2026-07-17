@@ -18,7 +18,7 @@ const TaskSection = ({ className }) => {
     enabled: !!user?.id,
   });
 
-  console.log("data", tasks);
+  console.log("data ", tasks);
 
   if (isLoading) {
     return (
@@ -52,11 +52,13 @@ const TaskSection = ({ className }) => {
           {tasks.map((task) => (
             <Task
               key={task.id}
+              taskId={task.id}
+              userId={user.id}
               title={task.title}
               content={task.content}
               createdAt={task.createdAt.toDate().toLocaleDateString("en-GB")}
               dueDate={task.dueDate}
-              status={task.complete ? "Completed" : "Pending"}
+              status={task.completed ? "Completed" : "Pending"}
             />
           ))}
         </div>

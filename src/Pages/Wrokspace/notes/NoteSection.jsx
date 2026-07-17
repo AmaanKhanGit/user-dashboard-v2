@@ -8,8 +8,6 @@ import WorkspaceLoading from "../component/WorkspaceLoading";
 const NoteSection = ({ className }) => {
   const { user } = useUser();
 
-  console.count("NoteSection render");
-
   const {
     data: notes = [],
     isLoading,
@@ -19,8 +17,6 @@ const NoteSection = ({ className }) => {
     queryFn: () => getNotes(user.id),
     enabled: !!user?.id,
   });
-
-  console.log("data ", notes);
 
   if (isLoading) {
     return (
@@ -54,6 +50,8 @@ const NoteSection = ({ className }) => {
           {notes.map((note) => (
             <Note
               key={note.id}
+              noteId={note.id}
+              userId={user.id}
               title={note.title}
               content={note.content}
               createdAt={note.createdAt.toDate().toLocaleDateString("en-GB")}

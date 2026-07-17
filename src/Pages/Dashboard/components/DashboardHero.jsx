@@ -14,7 +14,6 @@ const DashboardHero = ({ className }) => {
     isDueDate: false,
     onSubmit: null,
   });
-  const [modalType, setModalType] = useState(null);
 
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
