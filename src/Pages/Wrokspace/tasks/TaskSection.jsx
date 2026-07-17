@@ -3,6 +3,7 @@ import EmptyWorkspace from "../component/EmptyWorkspace";
 import Task from "./Task";
 import { useQuery } from "@tanstack/react-query";
 import { getTasks } from "../../../services/queryService";
+import WorkspaceLoading from "../component/WorkspaceLoading";
 
 const TaskSection = ({ className }) => {
   const { user } = useUser();
@@ -18,6 +19,14 @@ const TaskSection = ({ className }) => {
   });
 
   console.log("data", tasks);
+
+  if (isLoading) {
+    return (
+      <section className={`flex flex-col rounded-xl p-5 shadow ${className}`}>
+        <WorkspaceLoading />
+      </section>
+    );
+  }
 
   if (isError) {
     return <p>Error</p>;

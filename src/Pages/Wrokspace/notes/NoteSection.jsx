@@ -3,6 +3,7 @@ import EmptyWorkspace from "../component/EmptyWorkspace";
 import Note from "./Note";
 import { getNotes } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
+import WorkspaceLoading from "../component/WorkspaceLoading";
 
 const NoteSection = ({ className }) => {
   const { user } = useUser();
@@ -21,12 +22,20 @@ const NoteSection = ({ className }) => {
 
   console.log("data ", notes);
 
+  if (isLoading) {
+    return (
+      <section className={`flex flex-col rounded-xl p-5 shadow ${className}`}>
+        <WorkspaceLoading />
+      </section>
+    );
+  }
+
   if (isError) {
     return <p>Error</p>;
   }
 
   return (
-    <section className={`flex flex-col  rounded-xl p-5 shadow ${className}`}>
+    <section className={`flex flex-col rounded-xl p-5 shadow ${className}`}>
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-xl font-semibold text-slate-900">
           Notes
