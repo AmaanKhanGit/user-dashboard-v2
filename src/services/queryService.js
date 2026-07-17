@@ -25,7 +25,6 @@ export const getCompletedTasks = async (userId) => {
 };
 
 export const getNotes = async (userId) => {
-    console.count("getNotes called");
   const snapshot = await getDocs(collection(db, "users", userId, "notes"));
 
   return snapshot.docs.map((doc) => ({
