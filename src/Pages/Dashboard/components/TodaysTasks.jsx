@@ -7,41 +7,41 @@ import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
 import { Link } from "react-router-dom";
 
 const TodaysTasks = () => {
-  const tasks = [
-    {
-      id: 101,
-      title: "Create dashboard UI",
-      dueDate: "Due: Today, 11:43 AM",
-      status: "Success",
-      preview: "Planning to create a portfolio with content management panel",
-      colors: {
-        priorityColor: "bg-red-50 text-red-600",
-        statusColor: "bg-green-200 text-green-600",
-      },
-    },
-    {
-      id: 106,
-      title: "Solve Leetcode Probelem",
-      dueDate: "Due: Today, 09:10 PM",
-      status: "Pending",
-      preview: "Planning to create a portfolio with content management panel",
-      colors: {
-        priorityColor: "bg-amber-50 text-amber-600",
-        statusColor: "bg-amber-200 text-amber-600",
-      },
-    },
-    {
-      id: 103,
-      title: "Date a girl",
-      dueDate: "Due: Never",
-      status: "Never",
-      preview: "Planning to create a portfolio with content management panel",
-      colors: {
-        priorityColor: "bg-red-50 text-red-600",
-        statusColor: "bg-gray-200 text-gray-600",
-      },
-    },
-  ];
+  // const tasks = [
+  //   {
+  //     id: 101,
+  //     title: "Create dashboard UI",
+  //     dueDate: "Due: Today, 11:43 AM",
+  //     status: "Success",
+  //     preview: "Planning to create a portfolio with content management panel",
+  //     colors: {
+  //       priorityColor: "bg-red-50 text-red-600",
+  //       statusColor: "bg-green-200 text-green-600",
+  //     },
+  //   },
+  //   {
+  //     id: 106,
+  //     title: "Solve Leetcode Probelem",
+  //     dueDate: "Due: Today, 09:10 PM",
+  //     status: "Pending",
+  //     preview: "Planning to create a portfolio with content management panel",
+  //     colors: {
+  //       priorityColor: "bg-amber-50 text-amber-600",
+  //       statusColor: "bg-amber-200 text-amber-600",
+  //     },
+  //   },
+  //   {
+  //     id: 103,
+  //     title: "Date a girl",
+  //     dueDate: "Due: Never",
+  //     status: "Never",
+  //     preview: "Planning to create a portfolio with content management panel",
+  //     colors: {
+  //       priorityColor: "bg-red-50 text-red-600",
+  //       statusColor: "bg-gray-200 text-gray-600",
+  //     },
+  //   },
+  // ];
 
   const { user } = useUser();
 

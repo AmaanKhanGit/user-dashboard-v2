@@ -2,6 +2,8 @@ import { MdAccessTime } from "react-icons/md";
 import { CgNotes } from "react-icons/cg";
 
 const NotesCard = ({ note }) => {
+  const formattedDate = note.createdAt.toDate().toLocaleDateString();
+
   return (
     <article className="rounded-xl border border-purple-100 from-white to-purple-50 p-4 transition-all duration-200">
       <div className="flex items-start justify-between gap-4">
@@ -17,12 +19,12 @@ const NotesCard = ({ note }) => {
 
         <span className="flex shrink-0 items-center gap-1 rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-500">
           <MdAccessTime size={14} />
-          {note.updatedAt}
+          {formattedDate}
         </span>
       </div>
 
       <p className="mt-4 line-clamp-3 border-l-4 border-purple-200 pl-3 text-sm leading-6 text-gray-600">
-        {note.preview}
+        {note.content}
       </p>
     </article>
   );
