@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import Card from "./Card";
-
 import { CgNotes } from "react-icons/cg";
+import { getTasks } from "../../../services/queryService";
 
 import {
   FaArrowTrendDown,
@@ -8,7 +9,32 @@ import {
   FaRegCircleCheck,
 } from "react-icons/fa6";
 import { GoStopwatch } from "react-icons/go";
+import { useUser } from "@clerk/react";
 const StatusCards = ({ className }) => {
+  const { user } = useUser();
+
+  const { data } = useQuery({
+    queryKey: ["status-query"],
+    queryFn: () => getTasks(user.id),
+  });
+
+  let total = 0;
+  let completed = 0;
+  let pending = 0;
+  let productivity = 0;
+
+  if (data) {
+    console.log("status card data here : ", data);
+    total = data.length;
+    console.log("total", total);
+    completed = data.filter((i) => i.completed).length;
+    console.log("completed", completed);
+    pending = total - completed;
+    console.log("pending", pending);
+    productivity = total === 0 ? 0 : Math.round((completed / total) * 100);
+    console.log("productivity", productivity);
+  }
+
   const colorVariants = {
     purpleVar: "bg-purple-100 text-purple-800",
     greenVar: "bg-green-100 text-green-800",
@@ -18,43 +44,31 @@ const StatusCards = ({ className }) => {
   const cardData = [
     {
       title: "Total Tasks",
-      count: 128,
-      shotDesc: "All time tasks",
-      percentage: 12.5,
+      count: total,
+      shortDesc: "All time tasks",
       icon: CgNotes,
-      arrowIcon: FaArrowTrendUp,
       colorVariant: colorVariants.purpleVar,
-      statusColor: "text-green-600",
     },
     {
       title: "Completed",
-      count: 89,
-      shotDesc: "Tasks completed",
-      percentage: 18.2,
+      count: completed,
+      shortDesc: "Tasks completed",
       icon: FaRegCircleCheck,
-      arrowIcon: FaArrowTrendUp,
       colorVariant: colorVariants.greenVar,
-      statusColor: "text-green-600",
     },
     {
       title: "Pending",
-      count: 39,
-      shotDesc: "Tasks pending",
-      percentage: 8.1,
+      count: pending,
+      shortDesc: "Tasks pending",
       icon: GoStopwatch,
-      arrowIcon: FaArrowTrendDown,
       colorVariant: colorVariants.oragneVar,
-      statusColor: "text-red-600",
     },
     {
       title: "Productiviy",
-      count: 78,
-      shotDesc: "This week",
-      percentage: 14.3,
+      count: `${productivity} %`,
+      shortDesc: "This week",
       icon: FaArrowTrendUp,
-      arrowIcon: FaArrowTrendUp,
       colorVariant: colorVariants.purpleVar,
-      statusColor: "text-green-600",
     },
   ];
 
