@@ -1,5 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import Button from "../../../components/Layout/Button";
 import Task from "./Task";
+import { getTasks } from "../../../services/queryService";
+import { useUser } from "@clerk/react";
+import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
 
 const TodaysTasks = () => {
   const tasks = [
@@ -37,17 +41,52 @@ const TodaysTasks = () => {
       },
     },
   ];
+
+  const { user } = useUser();
+
+  const { data, isError, error } = useQuery({
+    queryKey: ["today-tasks"],
+    queryFn: () => getTasks(user.id),
+  });
+
+  let todayTasks = [];
+
+  if (data) {
+    console.log(data);
+    const today = new Date().toISOString().split("T")[0];
+
+    todayTasks = data.filter(
+      (task) => task.dueDate === today && !task.completed,
+    );
+
+    console.log(todayTasks);
+  }
+
+  if (isError) {
+    console.log(error);
+  }
+
   return (
     <section className="sections flex flex-col gap-3">
       <div className="flex justify-between">
         <h2 className="section-heading">Today's Tasks</h2>
         {/* <Button className="hollowBtn">View All</Button> */}
       </div>
-      <div className="mt-3 flex flex-col gap-3">
-        {tasks.map((task) => (
-          <Task key={task.id} task={task} />
-        ))}
-      </div>
+
+      {todayTasks.length === 0 ? (
+        <div className="mt-3 flex h-full flex-col justify-center gap-3">
+          <EmptyWorkspace
+            title="No tasks for today"
+            message="You're all caught up. Enjoy your day or add a new task."
+          />
+        </div>
+      ) : (
+        <div className="mt-3 flex h-full flex-col gap-3">
+          {todayTasks.map((task) => (
+            <Task key={task.id} task={task} />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
