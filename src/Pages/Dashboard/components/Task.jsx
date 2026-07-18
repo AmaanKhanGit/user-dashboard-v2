@@ -23,24 +23,38 @@ const Task = ({ task }) => {
   });
 
   return (
-    <div className="flex items-start gap-4 rounded-xl border border-gray-200 p-2">
+    <div className="flex items-start gap-4 rounded-xl border border-gray-200 p-3">
       <input
-        className="mt-1.5 scale-125"
+        className="mt-1.5 scale-125 accent-green-600"
         type="checkbox"
         name="complete"
-        id="complete"
-        onClick={() => mutate({ userId: user.id, taskId: task.id })}
+        id={`complete-${task.id}`}
+        checked={task.completed}
+        onChange={() => mutate({ userId: user.id, taskId: task.id })}
+        disabled={isPending || task.completed}
       />
-      <div className="flex flex-1 justify-between">
-        <div className="flex flex-col gap-1">
+
+      <div className="flex-1">
+        <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold">{task.title}</h3>
-          <p className="mt-4 line-clamp-3 border-l-4 border-purple-200 pl-3 text-sm leading-6 text-gray-600">
-            {task.content}
-          </p>
-          <p className="text-xs font-medium text-gray-400">{task.dueDate}</p>
+
+          <span
+            className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+              task.completed
+                ? "bg-green-200 text-green-600"
+                : "bg-red-200 text-red-600"
+            }`}
+          >
+            {task.completed ? "Completed" : "Pending"}
+          </span>
         </div>
+
+        <p className="mt-3 line-clamp-3 border-l-4 border-purple-200 pl-3 text-sm leading-6 text-gray-600">
+          {task.content}
+        </p>
+
+        <p className="mt-2 text-xs font-medium text-gray-400">{task.dueDate}</p>
       </div>
-      {isPending && <ActionLoader />}
     </div>
   );
 };
