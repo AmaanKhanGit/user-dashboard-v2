@@ -3,7 +3,13 @@ import Button from "../../../components/Layout/Button";
 import { useUser } from "@clerk/react";
 import { useContext, useState } from "react";
 import AddItemModal from "../modal/AddItemModal";
-import { DashboardContext } from "../../../Provider/DashboardProvider";
+import { useMutation } from "@tanstack/react-query";
+import {
+  handleAddNote,
+  handleAddTask,
+} from "../../../services/mutationService";
+import toast from "react-hot-toast";
+import ActionLoader from "../../Wrokspace/component/ActionLoader";
 
 const DashboardHero = ({ className }) => {
   const { user } = useUser();
@@ -12,7 +18,6 @@ const DashboardHero = ({ className }) => {
     type: "",
     title: "",
     isDueDate: false,
-    onSubmit: null,
   });
 
   const today = new Date().toLocaleDateString("en-US", {
@@ -38,14 +43,33 @@ const DashboardHero = ({ className }) => {
     quotes[Math.floor(Math.random() * quotes.length)],
   );
 
-  const { handleAddTask, handleAddNote } = useContext(DashboardContext);
+  const addTaskMutation = useMutation({
+    mutationKey: ["create-task"],
+    mutationFn: handleAddTask,
+    onSuccess: () => {
+      toast.success("Task created successfully");
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
+  const addNoteMutation = useMutation({
+    mutationKey: ["add-note"],
+    mutationFn: handleAddNote,
+    onSuccess: () => {
+      toast.success("Task created successfully");
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
 
   const handleTaskOpen = () => {
     setModalConfig({
       type: "task",
       title: "Create Task",
       isDueDate: true,
-      onSubmit: handleAddTask,
     });
     setOpen(true);
   };
@@ -55,10 +79,15 @@ const DashboardHero = ({ className }) => {
       type: "note",
       title: "Add Note",
       isDueDate: false,
-      onSubmit: handleAddNote,
     });
     setOpen(true);
   };
+
+  const mutationMap = {
+    task: addTaskMutation,
+    note: addNoteMutation,
+  };
+
   return (
     <section
       className={`sections flex justify-between max-md:flex-col ${className}`}
@@ -95,9 +124,20 @@ const DashboardHero = ({ className }) => {
       <AddItemModal
         open={isOpen}
         modalConfig={modalConfig}
-        onSubmit={modalConfig.type === "task" ? handleAddTask : handleAddNote}
+        onSubmit={async (values, actions) => {
+          await mutationMap[modalConfig.type].mutateAsync({
+            values,
+            userId: user.id,
+          });
+
+          actions.resetForm();
+        }}
         onClose={() => setOpen(false)}
       />
+
+      {(addTaskMutation.isPending || addNoteMutation.isPending) && (
+        <ActionLoader />
+      )}
     </section>
   );
 };

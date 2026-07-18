@@ -22,6 +22,7 @@ const AddItemModal = ({
   open,
   onClose,
   modalConfig,
+  onSubmit,
   nameLabel = "Title",
   contentLabel = "Description",
   dateLabel = "Due Date",
@@ -55,8 +56,7 @@ const AddItemModal = ({
           }}
           validationSchema={validationSchema(modalConfig.isDueDate)}
           onSubmit={async (values, actions) => {
-            await modalConfig.onSubmit(values);
-            actions.resetForm();
+            onSubmit(values, actions);
             onClose();
           }}
         >

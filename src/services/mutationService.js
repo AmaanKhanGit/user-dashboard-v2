@@ -1,7 +1,22 @@
 import { db } from "../firebase/firebase";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 
-// & notes mutation
+// & ==========notes mutation==========
+
+export const handleAddNote = async ({ values, userId }) => {
+  await addDoc(collection(db, "users", userId, "notes"), {
+    title: values.name,
+    content: values.content,
+    createdAt: serverTimestamp(),
+  });
+};
 
 export const deleteNote = async ({ userId, noteId }) => {
   await deleteDoc(doc(db, "users", userId, "notes", noteId));
@@ -13,7 +28,19 @@ export const editNote = async ({ userId, noteId, data }) => {
   });
 };
 
-// & tasks mutation
+// & ==========tasks mutation==========
+
+export const handleAddTask = async ({ values, userId }) => {
+  await addDoc(collection(db, "users", userId, "tasks"), {
+    title: values.name,
+    content: values.content,
+    dueDate: values.dueDate,
+    createdAt: serverTimestamp(),
+    completed: false,
+  });
+};
+
+// & notes
 
 export const deleteTask = async ({ userId, taskId }) => {
   await deleteDoc(doc(db, "users", userId, "tasks", taskId));
@@ -27,6 +54,6 @@ export const editTask = async ({ userId, taskId, data }) => {
 
 export const completeTask = async ({ userId, taskId }) => {
   await updateDoc(doc(db, "users", userId, "tasks", taskId), {
-    complete: true,
+    completed: true,
   });
 };
