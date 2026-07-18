@@ -3,7 +3,7 @@ import Button from "../../../components/Layout/Button";
 import { useUser } from "@clerk/react";
 import { useContext, useState } from "react";
 import AddItemModal from "../modal/AddItemModal";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   handleAddNote,
   handleAddTask,
@@ -43,10 +43,15 @@ const DashboardHero = ({ className }) => {
     quotes[Math.floor(Math.random() * quotes.length)],
   );
 
+  const queryClient = useQueryClient();
+
   const addTaskMutation = useMutation({
     mutationKey: ["create-task"],
     mutationFn: handleAddTask,
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["today-tasks"],
+      });
       toast.success("Task created successfully");
     },
     onError: (error) => {
@@ -58,6 +63,9 @@ const DashboardHero = ({ className }) => {
     mutationKey: ["add-note"],
     mutationFn: handleAddNote,
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["recent-notes"],
+      });
       toast.success("Task created successfully");
     },
     onError: (error) => {
