@@ -30,7 +30,7 @@ export const getRecentNotes = async (userId) => {
   const q = query(
     collection(db, "users", userId, "notes"),
     orderBy("createdAt", "desc"),
-    limit(5),
+    limit(4),
   );
 
   const snapshot = await getDocs(q);
