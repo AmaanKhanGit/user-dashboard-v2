@@ -24,15 +24,10 @@ const StatusCards = ({ className }) => {
   let productivity = 0;
 
   if (data) {
-    console.log("status card data here : ", data);
     total = data.length;
-    console.log("total", total);
     completed = data.filter((i) => i.completed).length;
-    console.log("completed", completed);
     pending = total - completed;
-    console.log("pending", pending);
     productivity = total === 0 ? 0 : Math.round((completed / total) * 100);
-    console.log("productivity", productivity);
   }
 
   const colorVariants = {
