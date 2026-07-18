@@ -18,7 +18,6 @@ const TaskSection = ({ className }) => {
     enabled: !!user?.id,
   });
 
-  console.log("data ", tasks);
 
   if (isLoading) {
     return (

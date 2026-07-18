@@ -37,9 +37,7 @@ const RecentNotes = () => {
     queryFn: () => getNotes(user.id),
   });
 
-  if (data) {
-    console.log(data);
-  }
+
 
   return (
     <section className="sections flex flex-col">

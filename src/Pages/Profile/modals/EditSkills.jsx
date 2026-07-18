@@ -10,7 +10,7 @@ const EditSkills = ({ setOpen }) => {
   const { user } = useUser();
   const { editSkills } = useContext(ProfileContext);
 
-  console.log(user.unsafeMetadata.skills);
+
 
   return (
     <Formik
