@@ -4,6 +4,7 @@ import Task from "./Task";
 import { getTasks } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
 import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
+import { Link } from "react-router-dom";
 
 const TodaysTasks = () => {
   const tasks = [
@@ -70,7 +71,9 @@ const TodaysTasks = () => {
     <section className="sections flex flex-col gap-3">
       <div className="flex justify-between">
         <h2 className="section-heading">Today's Tasks</h2>
-        {/* <Button className="hollowBtn">View All</Button> */}
+        <Link to="/workspace">
+          <Button className="hollowBtn">View All</Button>
+        </Link>
       </div>
 
       {todayTasks.length === 0 ? (
