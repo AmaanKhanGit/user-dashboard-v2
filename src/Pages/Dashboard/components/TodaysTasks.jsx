@@ -5,6 +5,7 @@ import { getTasks } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
 import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 
 const TodaysTasks = () => {
   // const tasks = [
@@ -50,18 +51,15 @@ const TodaysTasks = () => {
     queryFn: () => getTasks(user.id),
   });
 
-  let todayTasks = [];
+  const todayTasks = useMemo(() => {
+    if (!data) return [];
 
-  if (data) {
-    console.log(data);
     const today = new Date().toISOString().split("T")[0];
 
-    todayTasks = data.filter(
-      (task) => task.dueDate === today && !task.completed,
-    );
-
-    console.log(todayTasks);
-  }
+    return data
+      .filter((task) => task.dueDate === today && !task.completed)
+      .slice(0, 5);
+  }, [data]);
 
   if (isError) {
     console.log(error);
