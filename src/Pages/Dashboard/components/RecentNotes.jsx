@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import NotesCard from "./NotesCard";
 import { getNotes } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
+import { Link } from "react-router-dom";
+import Button from "../../../components/Layout/Button";
 
 // const notes = [
 //   {
@@ -41,7 +43,12 @@ const RecentNotes = () => {
 
   return (
     <section className="sections flex flex-col">
-      <h2 className="section-heading">Recent Notes</h2>
+      <div className="flex justify-between">
+        <h2 className="section-heading">Recent Notes</h2>
+        <Link to="/workspace">
+          <Button className="hollowBtn">View All</Button>
+        </Link>
+      </div>
 
       <div className="mt-8 flex flex-col gap-4">
         {data?.map((note) => (
