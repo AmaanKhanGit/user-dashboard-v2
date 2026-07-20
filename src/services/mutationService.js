@@ -37,7 +37,6 @@ export const handleAddTask = async ({ values, userId }) => {
     dueDate: values.dueDate,
     createdAt: serverTimestamp(),
     completed: false,
-    completedAt: null,
   });
 };
 
