@@ -64,7 +64,7 @@ src/
 ├── components/
 ├── firebase/
 ├── pages/
-├── protectedROutes/
+├── protectedRoutes/
 ├── provider/
 ├── services/
 ```
