@@ -37,6 +37,7 @@ export const handleAddTask = async ({ values, userId }) => {
     dueDate: values.dueDate,
     createdAt: serverTimestamp(),
     completed: false,
+    completedAt: null,
   });
 };
 
@@ -55,5 +56,6 @@ export const editTask = async ({ userId, taskId, data }) => {
 export const completeTask = async ({ userId, taskId }) => {
   await updateDoc(doc(db, "users", userId, "tasks", taskId), {
     completed: true,
+    completedAt: serverTimestamp(),
   });
 };
