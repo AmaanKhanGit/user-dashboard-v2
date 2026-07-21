@@ -12,54 +12,57 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useEffect, useMemo } from "react";
 
 const ProductivityGraph = ({ className }) => {
   const { user } = useUser();
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["productivity-graph"],
+    queryKey: ["productivity-graph", user?.id],
     queryFn: () => getTasks(user.id),
+    enabled: !!user.id,
   });
 
-  // date here
-  const chartData = [];
-  const today = new Date();
+  const chartData = useMemo(() => {
+    const chartData = [];
+    const today = new Date();
 
-  for (let i = 6; i >= 0; i--) {
-    const date = new Date(today);
-    date.setDate(today.getDate() - i);
-    chartData.push({
-      date: date.toLocaleDateString("en-GB", {
+    const formatDate = (date) =>
+      date.toLocaleDateString("en-GB", {
         day: "numeric",
         month: "short",
-      }),
-      completed: 0,
-    });
-  }
+      });
 
-  console.log(chartData);
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      chartData.push({
+        date: formatDate(date),
+        completed: 0,
+      });
+    }
 
-  if (data) {
-    data.forEach((el) => {
-      if (el.completedAt) {
-        const taskDate = el.completedAt.toDate().toLocaleDateString("en-GB", {
-          day: "numeric",
-          month: "short",
-        });
-        const day = chartData.find((item) => item.date === taskDate);
+    if (data) {
+      data.forEach((el) => {
+        if (el.completedAt) {
+          const taskDate = formatDate(el.completedAt.toDate());
+          const chartPoint = chartData.find((item) => item.date === taskDate);
 
-        if (day) {
-          day.completed++;
+          if (chartPoint) {
+            chartPoint.completed++;
+          }
         }
-      }
-    });
+      });
+    }
 
-    console.log("after proccess", chartData);
-  }
+    return chartData;
+  }, [data]);
 
-  if (isError) {
-    toast.error(error);
-  }
+  useEffect(() => {
+    if (isError) {
+      toast.error(error.message);
+    }
+  }, [isError]);
 
   if (isLoading) {
     return (
