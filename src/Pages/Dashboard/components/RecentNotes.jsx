@@ -4,6 +4,7 @@ import { getNotes } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Layout/Button";
+import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
 
 // const notes = [
 //   {
@@ -37,21 +38,23 @@ const RecentNotes = () => {
     queryFn: () => getNotes(user.id),
   });
 
-
-
   return (
     <section className="sections flex flex-col">
       <div className="flex justify-between">
         <h2 className="section-heading">Recent Notes</h2>
-        <Link to="/workspace">
-          <Button className="hollowBtn">View All</Button>
-        </Link>
       </div>
 
       <div className="mt-8 flex flex-col gap-4">
-        {data?.map((note) => (
-          <NotesCard key={note.id} note={note} />
-        ))}
+        {data?.length === 0 ? (
+          <div className="mt-3 flex h-full flex-col justify-center gap-3">
+            <EmptyWorkspace
+              title="No recent notes"
+              message="You're haven't added any note yet."
+            />
+          </div>
+        ) : (
+          data?.map((note) => <NotesCard key={note.id} note={note} />)
+        )}
       </div>
     </section>
   );

@@ -59,45 +59,52 @@ const RecentActivity = ({ className }) => {
     <section className={`sections flex flex-col gap-5 ${className}`}>
       <div className="flex items-center justify-between">
         <h3 className="section-heading">Recent Activity</h3>
-        <Button className="hollowBtn px-3 py-1">View all</Button>
       </div>
       <div className="flex flex-col gap-10">
-        {data?.map((activity) => {
-          const Icon =
-            activity.type === "note"
-              ? CgNotes
-              : activity.type === "task"
-                ? FaClipboardList
-                : activity.type === "deletion"
-                  ? FaTrashAlt
-                  : AiOutlineUser;
-          // const time = activity.timestamp.toDate().toLocalDateString();
+        {data?.length === 0 ? (
+          <div className="mt-3 flex h-full flex-col justify-center gap-3">
+            <EmptyWorkspace
+              title="No recent activities"
+              message="You just logged in"
+            />
+          </div>
+        ) : (
+          data?.map((activity) => {
+            const Icon =
+              activity.type === "note"
+                ? CgNotes
+                : activity.type === "task"
+                  ? FaClipboardList
+                  : activity.type === "deletion"
+                    ? FaTrashAlt
+                    : AiOutlineUser;
 
-          return (
-            <div
-              key={activity.id}
-              className="flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`rounded-full p-2 text-xl ${activity.type === "note" ? "bg-blue-100 text-blue-800" : activity.type === "task" ? "bg-green-100 text-green-800" : activity.type === "deletion" ? "bg-red-100 text-red-800" : "bg-purple-100 text-purple-800"}`}
-                >
-                  <Icon />
+            return (
+              <div
+                key={activity.id}
+                className="flex items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`rounded-full p-2 text-xl ${activity.type === "note" ? "bg-blue-100 text-blue-800" : activity.type === "task" ? "bg-green-100 text-green-800" : activity.type === "deletion" ? "bg-red-100 text-red-800" : "bg-purple-100 text-purple-800"}`}
+                  >
+                    <Icon />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <h2 className="text-sm">{activity.title}</h2>
+                    <p className="text-[13px] font-medium text-gray-400">
+                      {activity.content}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col items-start">
-                  <h2 className="text-sm">{activity.title}</h2>
-                  <p className="text-[13px] font-medium text-gray-400">
-                    {activity.content}
-                  </p>
-                </div>
+
+                <p className="shrink-0 text-sm text-gray-500">
+                  {getRelativeTime(activity.timestamp)}
+                </p>
               </div>
-
-              <p className="shrink-0 text-sm text-gray-500">
-                {getRelativeTime(activity.timestamp)}
-              </p>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </section>
   );
