@@ -67,10 +67,14 @@ export const handleAddTask = async ({ values, userId }) => {
 
 // & notes
 
-export const deleteTask = async ({ userId, taskId, title }) => {
-  await updateDoc(doc(db, "users", userId, "tasks", taskId), {
-    deleted: true,
-  });
+export const deleteTask = async ({ userId, taskId, title, completed }) => {
+  if (completed) {
+    await updateDoc(doc(db, "users", userId, "tasks", taskId), {
+      deleted: true,
+    });
+  } else {
+    await deleteDoc(doc(db, "users", userId, "tasks", taskId));
+  }
 
   // & we won't delete physically from database
 

@@ -20,7 +20,9 @@ const TodaysTasks = () => {
 
     const today = new Date().toISOString().split("T")[0];
 
-    return data.filter((task) => task.dueDate === today).slice(0, 4);
+    return data
+      .filter((task) => task.dueDate === today && !task.deleted)
+      .slice(0, 4);
   }, [data]);
 
   if (isError) {

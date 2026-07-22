@@ -36,7 +36,7 @@ const TaskSection = ({ className }) => {
         <h2 className="text-xl font-semibold text-slate-900">
           Tasks
           <span className="ml-2 text-base font-normal text-slate-500">
-            ({tasks.length})
+            ({tasks.filter((task) => !task.deleted).length})
           </span>
         </h2>
       </div>

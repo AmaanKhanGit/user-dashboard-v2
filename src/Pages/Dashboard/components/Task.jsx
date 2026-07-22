@@ -24,16 +24,6 @@ const Task = ({ task }) => {
 
   return (
     <div className="flex items-start gap-4 rounded-xl border border-gray-200 p-3">
-      <input
-        className="mt-1.5 scale-125 accent-green-600"
-        type="checkbox"
-        name="complete"
-        id={`complete-${task.id}`}
-        checked={task.completed}
-        onChange={() => mutate({ userId: user.id, taskId: task.id })}
-        disabled={isPending || task.completed}
-      />
-
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold">{task.title}</h3>

@@ -73,6 +73,8 @@ const Task = ({
     },
   });
 
+  const completed = status === "Completed";
+
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-5">
       <div className="flex items-start justify-between gap-4">
@@ -130,7 +132,9 @@ const Task = ({
 
           <button
             disabled={deleteMutation.isPending}
-            onClick={() => deleteMutation.mutate({ userId, taskId, title })}
+            onClick={() =>
+              deleteMutation.mutate({ userId, taskId, title, completed })
+            }
             className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-red-100 text-red-600 ${deleteMutation.isPending && "cursor-not-allowed"}`}
           >
             {deleteMutation.isPending ? <CgSpinner /> : <FaTrash />}
