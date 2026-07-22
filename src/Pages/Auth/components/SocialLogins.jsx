@@ -12,7 +12,7 @@ const SocialLogins = () => {
         onClick={() => handleSocialLogin("oauth_google")}
         type="button"
         name="google"
-        className="social-btn social-google flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md"
+        className="social-btn social-google flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
         aria-label="Sign in with Google"
       >
         <div className="flex w-50 items-center justify-start gap-4">
@@ -25,7 +25,7 @@ const SocialLogins = () => {
         onClick={() => handleSocialLogin("oauth_facebook")}
         type="button"
         name="facebook"
-        className="social-btn social-facebook flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md"
+        className="social-btn social-facebook flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
         aria-label="Sign in with Facebook"
       >
         <div className="flex w-50 items-center justify-start gap-4">
@@ -38,7 +38,7 @@ const SocialLogins = () => {
         onClick={() => handleSocialLogin("oauth_github")}
         type="button"
         name="github"
-        className="social-btn social-github flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md"
+        className="social-btn social-github flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
         aria-label="Sign in with GitHub"
       >
         <div className="flex w-50 items-center justify-start gap-4">

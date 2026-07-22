@@ -109,10 +109,12 @@ const DashboardHero = ({ className }) => {
       <div className="flex flex-col gap-5">
         <h1 className="text-3xl font-bold">
           <div>{greeting},</div>
-          <div className="text-purple-700">{user.fullName}</div>
+          <div className="text-purple-700 dark:text-purple-300">
+            {user.fullName}
+          </div>
         </h1>
-        <p className="text-lg text-gray-400">{today}</p>
-        <p className="text-lg text-gray-400">{randQuote}</p>
+        <p className="text-lg text-gray-400 dark:text-gray-500">{today}</p>
+        <p className="text-lg text-gray-400 dark:text-gray-500">{randQuote}</p>
         <div className="mt-5 flex gap-3">
           <Button
             onClick={handleTaskOpen}

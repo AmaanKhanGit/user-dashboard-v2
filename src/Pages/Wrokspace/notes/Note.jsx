@@ -41,15 +41,17 @@ const Note = ({ title, content, createdAt, noteId, userId }) => {
   });
 
   return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-5">
-      <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+    <article className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-900">
+      <h3 className="text-lg font-semibold text-slate-900 dark:text-gray-100">
+        {title}
+      </h3>
 
-      <p className="mt-2 line-clamp-4 text-sm leading-6 whitespace-pre-wrap text-slate-600">
+      <p className="mt-2 line-clamp-4 text-sm leading-6 whitespace-pre-wrap text-slate-600 dark:text-gray-300">
         {content}
       </p>
 
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-4">
-        <div className="flex items-center gap-2 text-sm text-slate-500">
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-4 dark:border-gray-800">
+        <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-gray-400">
           <FaCalendarAlt className="text-purple-600" />
           <span>Created: {createdAt}</span>
         </div>
@@ -57,7 +59,7 @@ const Note = ({ title, content, createdAt, noteId, userId }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setOpen(true)}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-purple-100 text-purple-700"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-purple-100 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300"
           >
             <FaEdit />
           </button>

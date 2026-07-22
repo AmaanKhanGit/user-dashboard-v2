@@ -32,9 +32,9 @@ const TaskSection = ({ className }) => {
   return (
     <section className={`flex flex-col rounded-xl p-5 shadow ${className}`}>
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-gray-100">
           Tasks
-          <span className="ml-2 text-base font-normal text-slate-500">
+          <span className="ml-2 text-base font-normal text-slate-500 dark:text-gray-400">
             ({tasks.length})
           </span>
         </h2>
@@ -45,7 +45,7 @@ const TaskSection = ({ className }) => {
           message="Create your first task to stay organized and productive."
         />
       ) : (
-        <div className="flex flex-col gap-3 bg-white">
+        <div className="flex flex-col gap-3 bg-white dark:bg-gray-900">
           {tasks.map((task) => (
             <Task
               key={task.id}

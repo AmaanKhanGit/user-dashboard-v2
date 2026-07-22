@@ -21,8 +21,10 @@ const SignInForm = ({ fetchStatus, onForgot }) => {
   return (
     <>
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900">Welcome back</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Welcome back
+        </h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">
           Sign in to continue to your dashboard
         </p>
       </div>
@@ -39,7 +41,7 @@ const SignInForm = ({ fetchStatus, onForgot }) => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
             >
               Email Address
             </label>
@@ -49,7 +51,7 @@ const SignInForm = ({ fetchStatus, onForgot }) => {
               id="email"
               type="email"
               placeholder="you@example.com"
-              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
             />
             <ErrorMessage name="email">
               {(msg) => (
@@ -61,7 +63,7 @@ const SignInForm = ({ fetchStatus, onForgot }) => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
             >
               Password
             </label>
@@ -71,7 +73,7 @@ const SignInForm = ({ fetchStatus, onForgot }) => {
               id="password"
               type="password"
               placeholder="••••••••"
-              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
             />
             <ErrorMessage name="password">
               {(msg) => (
@@ -103,7 +105,7 @@ const SignInForm = ({ fetchStatus, onForgot }) => {
             {fetchStatus === "fetching" ? "Submitting.." : "Login"}
           </Button>
 
-          <p className="text-center text-sm text-gray-600">
+          <p className="text-center text-sm text-gray-600 dark:text-gray-300">
             Don&apos;t have an account?
             <Link
               to="/sign-up"

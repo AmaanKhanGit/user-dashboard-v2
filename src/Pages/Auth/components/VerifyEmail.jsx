@@ -15,16 +15,20 @@ const VerifyEmail = ({ email, onBackClick, timer, onSubmit, onResend }) => {
   // AuthContext: pass the verification submit and resend handlers from context into this component.
 
   return (
-    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg dark:bg-gray-900">
       <div className="mb-8 flex justify-center">
         <Mail className="h-12 w-12 text-purple-600" />
       </div>
 
       <div className="mb-8 text-center">
-        <h1 className="text-2xl font-bold text-gray-900">Verify Your Email</h1>
-        <p className="mt-2 text-sm text-gray-600">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          Verify Your Email
+        </h1>
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
           We sent a verification code to
-          <span className="font-semibold text-gray-900">{email}</span>
+          <span className="font-semibold text-gray-900 dark:text-gray-100">
+            {email}
+          </span>
         </p>
       </div>
 
@@ -40,7 +44,7 @@ const VerifyEmail = ({ email, onBackClick, timer, onSubmit, onResend }) => {
             <div>
               <label
                 htmlFor="code"
-                className="block text-sm font-semibold text-gray-700"
+                className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
               >
                 Verification Code
               </label>
@@ -51,10 +55,10 @@ const VerifyEmail = ({ email, onBackClick, timer, onSubmit, onResend }) => {
                 placeholder="000000"
                 maxLength={6}
                 inputMode="numeric"
-                className={`mt-2 w-full rounded-lg border-2 bg-gray-50 px-4 py-3 text-center text-2xl font-bold tracking-widest text-gray-900 placeholder-gray-400 transition-colors ${
+                className={`mt-2 w-full rounded-lg border-2 bg-gray-50 px-4 py-3 text-center text-2xl font-bold tracking-widest text-gray-900 placeholder-gray-400 transition-colors dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 ${
                   errors.code && touched.code
                     ? "border-red-500 focus:border-red-500 focus:bg-red-50 focus:outline-none"
-                    : "border-gray-200 focus:border-purple-500 focus:bg-white focus:outline-none"
+                    : "border-gray-200 focus:border-purple-500 focus:bg-white focus:outline-none dark:border-gray-700 dark:focus:bg-gray-900"
                 }`}
               />
               {errors.code && touched.code && (
@@ -75,7 +79,7 @@ const VerifyEmail = ({ email, onBackClick, timer, onSubmit, onResend }) => {
         )}
       </Formik>
 
-      <div className="mt-6 border-t border-gray-200 pt-6">
+      <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-800">
         <button
           onClick={onResend}
           type="button"
@@ -89,7 +93,7 @@ const VerifyEmail = ({ email, onBackClick, timer, onSubmit, onResend }) => {
       {onBackClick && (
         <button
           onClick={onBackClick}
-          className="mt-4 w-full text-center text-sm text-gray-600 hover:text-gray-900"
+          className="mt-4 w-full text-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
         >
           Back to Sign Up
         </button>

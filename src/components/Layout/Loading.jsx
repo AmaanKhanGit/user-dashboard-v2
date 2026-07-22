@@ -6,7 +6,7 @@ const Loading = () => {
       aria-live="polite"
       aria-label="Loading application"
     >
-      <div className="flex w-[min(320px,calc(100vw-2rem))] flex-col items-center justify-center gap-5 rounded-3xl border border-violet-400/20 bg-white/80 px-9 py-8 text-center shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+      <div className="flex w-[min(320px,calc(100vw-2rem))] flex-col items-center justify-center gap-5 rounded-3xl border border-violet-400/20 bg-white/80 px-9 py-8 text-center shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-gray-800 dark:bg-gray-900/80">
         <div
           className="relative grid h-20 w-20 place-items-center"
           aria-hidden="true"
@@ -16,10 +16,10 @@ const Loading = () => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <h2 className="m-0 text-[1.05rem] font-bold tracking-[-0.02em] text-slate-800">
+          <h2 className="m-0 text-[1.05rem] font-bold tracking-[-0.02em] text-slate-800 dark:text-gray-100">
             Preparing your workspace
           </h2>
-          <p className="m-0 text-[0.95rem] text-slate-500">
+          <p className="m-0 text-[0.95rem] text-slate-500 dark:text-gray-400">
             Setting up your dashboard experience.
           </p>
         </div>

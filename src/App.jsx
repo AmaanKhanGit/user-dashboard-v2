@@ -88,6 +88,8 @@ function App() {
         <Toaster
           position="bottom-center"
           toastOptions={{
+            className:
+              "!bg-white !text-gray-900 dark:!bg-gray-900 dark:!text-gray-100",
             style: {
               height: "50px",
               fontSize: "14px",

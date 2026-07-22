@@ -24,14 +24,14 @@ const ProfileMenu = () => {
 
       {/* Dropdown */}
       <div
-        className={`absolute right-0 mt-2 w-48 origin-top rounded-xl bg-white shadow-lg transition-all duration-300 ease-out ${
+        className={`absolute right-0 mt-2 w-48 origin-top rounded-xl bg-white shadow-lg transition-all duration-300 ease-out dark:bg-gray-900 ${
           isOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible -translate-y-3 opacity-0"
         }`}
       >
         <Link to="/profile">
-          <button className="w-full cursor-pointer rounded-xl px-4 py-3 text-left text-lg transition-colors hover:bg-gray-100">
+          <button className="w-full cursor-pointer rounded-xl px-4 py-3 text-left text-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-800">
             Profile
           </button>
         </Link>

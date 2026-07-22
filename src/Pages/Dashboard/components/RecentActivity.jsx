@@ -86,19 +86,19 @@ const RecentActivity = ({ className }) => {
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`rounded-full p-2 text-xl ${activity.type === "note" ? "bg-blue-100 text-blue-800" : activity.type === "task" ? "bg-green-100 text-green-800" : activity.type === "deletion" ? "bg-red-100 text-red-800" : "bg-purple-100 text-purple-800"}`}
+                    className={`rounded-full p-2 text-xl ${activity.type === "note" ? "bg-blue-100 text-blue-800 dark:bg-blue-950/50 dark:text-blue-300" : activity.type === "task" ? "bg-green-100 text-green-800 dark:bg-green-950/50 dark:text-green-300" : activity.type === "deletion" ? "bg-red-100 text-red-800 dark:bg-red-950/50 dark:text-red-300" : "bg-purple-100 text-purple-800 dark:bg-purple-950/50 dark:text-purple-300"}`}
                   >
                     <Icon />
                   </div>
                   <div className="flex flex-col items-start">
                     <h2 className="text-sm">{activity.title}</h2>
-                    <p className="text-[13px] font-medium text-gray-400">
+                    <p className="text-[13px] font-medium text-gray-400 dark:text-gray-500">
                       {activity.content}
                     </p>
                   </div>
                 </div>
 
-                <p className="shrink-0 text-sm text-gray-500">
+                <p className="shrink-0 text-sm text-gray-500 dark:text-gray-400">
                   {getRelativeTime(activity.timestamp)}
                 </p>
               </div>

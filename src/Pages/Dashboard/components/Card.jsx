@@ -16,9 +16,13 @@ const Card = ({ card }) => {
 
           {/* Content */}
           <div className="flex flex-col gap-3">
-            <p className="text-sm text-gray-500">{card.title}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {card.title}
+            </p>
             <h2 className="text-xl font-bold sm:text-2xl">{card.count}</h2>
-            <p className="text-sm text-gray-500">{card.shortDesc}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {card.shortDesc}
+            </p>
           </div>
         </div>
 

@@ -31,18 +31,18 @@ const EditItemModal = ({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-lg rounded-2xl bg-white shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/50 p-4">
+      <div className="w-full max-w-lg rounded-2xl bg-white shadow-xl dark:bg-gray-900">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-          <h2 className="text-xl font-semibold text-gray-800">
+        <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-gray-800">
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
             {modalConfig.title}
           </h2>
 
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
+            className="rounded-lg p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
           >
             <X size={20} />
           </button>
@@ -65,7 +65,7 @@ const EditItemModal = ({
             <Form className="space-y-5 p-6">
               {/* Name */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                   {nameLabel}
                 </label>
 
@@ -73,7 +73,7 @@ const EditItemModal = ({
                   name="name"
                   type="text"
                   placeholder={`Enter ${nameLabel.toLowerCase()}`}
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 transition outline-none focus:border-violet-500"
+                  className="w-full rounded-xl border border-gray-300 px-4 py-3 transition outline-none focus:border-violet-500 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100"
                 />
 
                 <ErrorMessage
@@ -85,7 +85,7 @@ const EditItemModal = ({
 
               {/* Content */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                   {contentLabel}
                 </label>
 
@@ -94,7 +94,7 @@ const EditItemModal = ({
                   name="content"
                   rows={5}
                   placeholder={`Write ${contentLabel.toLowerCase()}...`}
-                  className="w-full resize-none rounded-xl border border-gray-300 px-4 py-3 transition outline-none focus:border-violet-500"
+                  className="w-full resize-none rounded-xl border border-gray-300 px-4 py-3 transition outline-none focus:border-violet-500 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100"
                 />
 
                 <ErrorMessage
@@ -106,14 +106,14 @@ const EditItemModal = ({
 
               {modalConfig.isDueDate && (
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-gray-700">
+                  <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                     {dateLabel}
                   </label>
 
                   <Field
                     type="date"
                     name="dueDate"
-                    className="w-full resize-none rounded-xl border border-gray-300 px-4 py-3 transition outline-none focus:border-violet-500"
+                    className="w-full resize-none rounded-xl border border-gray-300 px-4 py-3 transition outline-none focus:border-violet-500 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100"
                   />
 
                   <ErrorMessage
@@ -129,7 +129,7 @@ const EditItemModal = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rounded-xl border border-gray-300 px-5 py-2.5 font-medium text-gray-700 transition hover:bg-gray-100"
+                  className="rounded-xl border border-gray-300 px-5 py-2.5 font-medium text-gray-700 transition hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
                 >
                   Cancel
                 </button>

@@ -55,7 +55,7 @@ const PersonalInfo = ({ className }) => {
         <h2 className="text-xl font-bold"> Personal Information</h2>
         <Button
           onClick={() => setOpen(true)}
-          className="hollowBtn flex items-center gap-2 border-none bg-gray-100"
+          className="hollowBtn flex items-center gap-2 border-none bg-gray-100 dark:bg-gray-800"
         >
           <MdEdit />
           Edit
@@ -67,14 +67,14 @@ const PersonalInfo = ({ className }) => {
             const Icon = info.icon;
             return (
               <div key={info.title} className="flex gap-3">
-                <div className="self-start rounded-xl bg-gray-200 p-2 text-xl text-purple-600">
+                <div className="self-start rounded-xl bg-gray-200 p-2 text-xl text-purple-600 dark:bg-gray-800 dark:text-purple-300">
                   <Icon />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="text-sm font-medium text-gray-600">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                     {info.title}
                   </p>
-                  <p className="text-sm font-medium text-gray-600">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                     {info.desc.length > 0 ? info.desc : "Not Added"}
                   </p>
                 </div>
@@ -83,7 +83,7 @@ const PersonalInfo = ({ className }) => {
           })}
         </div>
       </div>
-      <hr className="text-gray-200" />
+      <hr className="text-gray-200 dark:text-gray-800" />
       <div className="mt-3">
         <h2 className="text-xl font-bold">Security</h2>
         <div className="flex justify-between">

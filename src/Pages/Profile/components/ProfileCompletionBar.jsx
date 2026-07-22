@@ -38,9 +38,9 @@ const ProfileCompletionBar = ({ setOpen }) => {
   if (!hasAnyLink) missingFields.push("Social links");
 
   return (
-    <div className="h-fit rounded-2xl border border-gray-200 bg-white p-6">
+    <div className="h-fit rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold text-gray-900">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
           Complete your profile
         </h3>
 
@@ -49,7 +49,7 @@ const ProfileCompletionBar = ({ setOpen }) => {
         </span>
       </div>
 
-      <div className="mt-4 h-2 overflow-hidden rounded-full bg-gray-200">
+      <div className="mt-4 h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
         <div
           className="h-full rounded-full bg-violet-600 transition-all duration-500"
           style={{ width: `${progress}%` }}
@@ -67,7 +67,7 @@ const ProfileCompletionBar = ({ setOpen }) => {
         </div>
       ) : (
         <>
-          <p className="mt-5 text-sm text-gray-600">
+          <p className="mt-5 text-sm text-gray-600 dark:text-gray-300">
             {missingFields.length} step
             {missingFields.length > 1 && "s"} remaining
           </p>
@@ -76,7 +76,7 @@ const ProfileCompletionBar = ({ setOpen }) => {
             {missingFields.slice(0, 3).map((field) => (
               <div
                 key={field}
-                className="flex items-center gap-3 text-gray-700"
+                className="flex items-center gap-3 text-gray-700 dark:text-gray-300"
               >
                 <Circle size={18} className="text-gray-400" />
                 <span>{field}</span>
@@ -84,7 +84,7 @@ const ProfileCompletionBar = ({ setOpen }) => {
             ))}
 
             {missingFields.length > 3 && (
-              <p className="pl-7 text-sm text-gray-500">
+              <p className="pl-7 text-sm text-gray-500 dark:text-gray-400">
                 +{missingFields.length - 3} more
               </p>
             )}

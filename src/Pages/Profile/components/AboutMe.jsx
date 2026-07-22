@@ -16,7 +16,7 @@ const AboutMe = () => {
         <h2 className="text-xl font-bold"> About Me</h2>
         <Button
           onClick={() => setOpen(true)}
-          className="hollowBtn flex items-center gap-2 border-none bg-gray-100"
+          className="hollowBtn flex items-center gap-2 border-none bg-gray-100 dark:bg-gray-800"
         >
           <MdEdit />
           Edit
@@ -24,7 +24,7 @@ const AboutMe = () => {
       </div>
       <div className="mt-3">
         {user.unsafeMetadata.about.length > 0 ? (
-          <p className="text-lg whitespace-pre-wrap text-gray-600">
+          <p className="text-lg whitespace-pre-wrap text-gray-600 dark:text-gray-300">
             {user.unsafeMetadata.about}
           </p>
         ) : (

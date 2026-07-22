@@ -95,17 +95,17 @@ const ProfileHero = ({ className }) => {
             {/* More Actions */}
             <button
               onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="absolute top-1 right-1 rounded-full bg-white p-1.5 text-gray-600 shadow transition hover:bg-gray-100"
+              className="absolute top-1 right-1 rounded-full bg-white p-1.5 text-gray-600 shadow transition hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
             >
               <MoreVertical size={16} />
             </button>
 
             {/* Dropdown */}
             {isMenuOpen && (
-              <div className="absolute top-10 right-0 z-10 w-44 overflow-hidden rounded-xl border border-gray-200 bg-white py-1 shadow-lg">
+              <div className="absolute top-10 right-0 z-10 w-44 overflow-hidden rounded-xl border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-800 dark:bg-gray-900">
                 <label
                   htmlFor="profile-image"
-                  className="flex cursor-pointer items-center gap-3 px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100"
+                  className="flex cursor-pointer items-center gap-3 px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
                 >
                   <Camera size={16} />
                   <span>Change Photo</span>
@@ -132,26 +132,26 @@ const ProfileHero = ({ className }) => {
           </div>
 
           <div className="space-y-1">
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
               {user.fullName}
             </h2>
 
-            <p className="text-lg font-medium text-gray-700">
+            <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
               {user.unsafeMetadata.profession || ""}
             </p>
 
-            <p className="text-base text-gray-500">
+            <p className="text-base text-gray-500 dark:text-gray-400">
               {user.emailAddresses[0].emailAddress}
             </p>
           </div>
         </div>
 
         <div className="space-y-4">
-          <p className="max-w-2xl text-lg font-semibold text-gray-700">
+          <p className="max-w-2xl text-lg font-semibold text-gray-700 dark:text-gray-300">
             {user.unsafeMetadata.bio || "No bio added"}
           </p>
 
-          <div className="space-y-2 text-gray-600">
+          <div className="space-y-2 text-gray-600 dark:text-gray-300">
             <div className="flex items-center gap-2">
               <MapPin size={18} />
               <span>{user.unsafeMetadata.location || "where do you live"}</span>

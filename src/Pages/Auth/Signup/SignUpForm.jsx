@@ -25,12 +25,14 @@ const SignUpForm = ({ fetchStatus }) => {
   const { handleSignUpSubmit } = useContext(AuthContext);
 
   return (
-    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg dark:bg-gray-900">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-900">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
           Welcome to Dashboard
         </h1>
-        <p className="mt-2 text-gray-600">Create your account</p>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">
+          Create your account
+        </p>
       </div>
 
       <Formik
@@ -48,7 +50,7 @@ const SignUpForm = ({ fetchStatus }) => {
           <div>
             <label
               htmlFor="firstName"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
             >
               First Name
             </label>
@@ -68,7 +70,7 @@ const SignUpForm = ({ fetchStatus }) => {
           <div>
             <label
               htmlFor="lastName"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
             >
               Last Name
             </label>
@@ -88,7 +90,7 @@ const SignUpForm = ({ fetchStatus }) => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
             >
               Email Address
             </label>
@@ -109,7 +111,7 @@ const SignUpForm = ({ fetchStatus }) => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
             >
               Password
             </label>
@@ -129,7 +131,7 @@ const SignUpForm = ({ fetchStatus }) => {
           <div>
             <label
               htmlFor="repeatPassword"
-              className="block text-sm font-semibold text-gray-700"
+              className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
             >
               Repeat Password
             </label>
@@ -163,7 +165,7 @@ const SignUpForm = ({ fetchStatus }) => {
             {fetchStatus === "fetching" ? "Submitting.." : "Sign Up"}
           </Button>
 
-          <p className="text-center text-sm text-gray-600">
+          <p className="text-center text-sm text-gray-600 dark:text-gray-300">
             Already have an account?
             <Link
               to="/sign-in"

@@ -23,8 +23,10 @@ const ResetPassword = () => {
     <FormLayout>
       <AuthCard className="w-full max-w-md">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Reset password</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            Reset password
+          </h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-300">
             Reset your password to access your account
           </p>
         </div>
@@ -41,7 +43,7 @@ const ResetPassword = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-gray-700"
+                className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
               >
                 Password
               </label>
@@ -51,7 +53,7 @@ const ResetPassword = () => {
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+                className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
               />
               <ErrorMessage name="password">
                 {(msg) => (
@@ -63,7 +65,7 @@ const ResetPassword = () => {
             <div>
               <label
                 htmlFor="repeatPassword"
-                className="block text-sm font-semibold text-gray-700"
+                className="block text-sm font-semibold text-gray-700 dark:text-gray-300"
               >
                 Repeat Password
               </label>
@@ -73,7 +75,7 @@ const ResetPassword = () => {
                 id="repeatPassword"
                 type="password"
                 placeholder="••••••••"
-                className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+                className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
               />
               <ErrorMessage name="repeatPassword">
                 {(msg) => (

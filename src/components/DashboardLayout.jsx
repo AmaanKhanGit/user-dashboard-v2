@@ -16,20 +16,20 @@ const DashboardLayout = ({ children, className }) => {
 
       <div className="flex min-h-0 flex-1 overflow-hidden">
         <MobileDrawer
-          className={`fixed top-0 left-0 z-50 h-screen w-64 bg-white transition-transform duration-300 md:static ${isOpen ? "translate-x-0" : "-translate-x-full"} sm:hidden`}
+          className={`fixed top-0 left-0 z-50 h-screen w-64 bg-white transition-transform duration-300 md:static dark:bg-gray-900 ${isOpen ? "translate-x-0" : "-translate-x-full"} sm:hidden`}
         >
           <Sidebar
-            className="z-10 flex h-full w-64 flex-col bg-white p-6"
+            className="z-10 flex h-full w-64 flex-col bg-white p-6 dark:bg-gray-900"
             onClose={() => setOpen(false)}
           />
         </MobileDrawer>
 
         <DesktopDrawer className="flex h-full w-64 shrink-0 max-sm:hidden">
-          <Sidebar className="z-10 flex h-full w-full flex-col bg-white p-6" />
+          <Sidebar className="z-10 flex h-full w-full flex-col bg-white p-6 dark:bg-gray-900" />
         </DesktopDrawer>
 
         <main
-          className={`min-h-0 flex-1 scrollbar-none overflow-y-auto bg-gray-100 ${className}`}
+          className={`min-h-0 flex-1 scrollbar-none overflow-y-auto bg-gray-100 dark:bg-gray-950 ${className}`}
         >
           {children}
         </main>

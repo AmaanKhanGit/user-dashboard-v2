@@ -5,25 +5,25 @@ const NotesCard = ({ note }) => {
   const formattedDate = note.createdAt.toDate().toLocaleDateString();
 
   return (
-    <article className="rounded-xl border border-purple-100 from-white to-purple-50 p-4 transition-all duration-200">
+    <article className="rounded-xl border border-purple-100 from-white to-purple-50 p-4 transition-all duration-200 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-purple-100 p-2 text-purple-700">
+          <div className="rounded-lg bg-purple-100 p-2 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300">
             <CgNotes size={18} />
           </div>
 
-          <h3 className="line-clamp-1 text-sm font-semibold text-gray-800">
+          <h3 className="line-clamp-1 text-sm font-semibold text-gray-800 dark:text-gray-100">
             {note.title}
           </h3>
         </div>
 
-        <span className="flex shrink-0 items-center gap-1 rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-500">
+        <span className="flex shrink-0 items-center gap-1 rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-500 dark:bg-gray-800 dark:text-gray-400">
           <MdAccessTime size={14} />
           {formattedDate}
         </span>
       </div>
 
-      <p className="mt-4 line-clamp-3 border-l-4 border-purple-200 pl-3 text-sm leading-6 text-gray-600">
+      <p className="mt-4 line-clamp-3 border-l-4 border-purple-200 pl-3 text-sm leading-6 text-gray-600 dark:border-purple-900 dark:text-gray-300">
         {note.content.replace(/\n/g, " ").trim() + "..."}
       </p>
     </article>

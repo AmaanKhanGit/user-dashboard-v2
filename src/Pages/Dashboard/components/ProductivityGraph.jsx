@@ -123,7 +123,7 @@ const ProductivityGraph = ({ className }) => {
         </ResponsiveContainer>
       </div>
 
-      <div className="rounded-xl bg-gray-50 px-4 py-3 text-center text-sm text-gray-500">
+      <div className="rounded-xl bg-gray-50 px-4 py-3 text-center text-sm text-gray-500 dark:bg-gray-900 dark:text-gray-400">
         Great job! Your productivity is higher than last week.
       </div>
     </section>

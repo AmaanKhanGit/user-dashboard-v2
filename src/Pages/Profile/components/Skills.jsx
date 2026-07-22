@@ -17,7 +17,7 @@ const Skills = () => {
         <h2 className="text-xl font-bold"> Skills</h2>
         <Button
           onClick={() => setOpen(true)}
-          className="hollowBtn flex items-center gap-2 border-none bg-gray-100"
+          className="hollowBtn flex items-center gap-2 border-none bg-gray-100 dark:bg-gray-800"
         >
           <MdEdit />
           Edit
@@ -29,7 +29,7 @@ const Skills = () => {
             {skills.map((skill) => (
               <span
                 key={skill}
-                className="rounded-2xl border border-purple-600 bg-purple-100 px-3 py-1 text-purple-600"
+                className="rounded-2xl border border-purple-600 bg-purple-100 px-3 py-1 text-purple-600 dark:bg-purple-950/50 dark:text-purple-300"
               >
                 {skill}
               </span>

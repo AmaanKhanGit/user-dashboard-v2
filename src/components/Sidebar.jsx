@@ -50,7 +50,7 @@ const Sidebar = ({ onClose, className }) => {
               key={link.title}
               onClick={handleClick}
               className={({ isActive }) =>
-                `w-full cursor-pointer rounded-lg px-4 py-2 text-xl font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-100 ${isActive ? "bg-gray-100 text-purple-700" : "bg-white"}`
+                `w-full cursor-pointer rounded-lg px-4 py-2 text-xl font-medium text-gray-700 transition-colors duration-200 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 ${isActive ? "bg-gray-100 text-purple-700 dark:bg-gray-800 dark:text-purple-300" : "bg-white dark:bg-gray-900"}`
               }
             >
               <div className="flex items-center gap-2">

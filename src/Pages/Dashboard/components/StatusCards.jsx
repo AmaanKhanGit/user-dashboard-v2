@@ -31,9 +31,12 @@ const StatusCards = ({ className }) => {
   }
 
   const colorVariants = {
-    purpleVar: "bg-purple-100 text-purple-800",
-    greenVar: "bg-green-100 text-green-800",
-    oragneVar: "bg-orange-100 text-orange-800",
+    purpleVar:
+      "bg-purple-100 text-purple-800 dark:bg-purple-950/50 dark:text-purple-300",
+    greenVar:
+      "bg-green-100 text-green-800 dark:bg-green-950/50 dark:text-green-300",
+    oragneVar:
+      "bg-orange-100 text-orange-800 dark:bg-orange-950/50 dark:text-orange-300",
   };
 
   const cardData = [
