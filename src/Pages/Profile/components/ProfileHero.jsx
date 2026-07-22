@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
-import Button from "../../../components/Layout/Button";
-import { CalendarDays, Circle, CircleCheckBig, MapPin } from "lucide-react";
+
+import { CalendarDays, MapPin } from "lucide-react";
 import {
   FaGithub,
   FaInstagram,
@@ -11,6 +10,7 @@ import {
 import { useUser } from "@clerk/react";
 import EditModal from "./EditModal";
 import EditPersonalInfo from "../modals/EditPersonalInfo";
+import ProfileCompletionBar from "./ProfileCompletionBar";
 
 const ProfileHero = ({ className }) => {
   const { user } = useUser();
@@ -102,56 +102,12 @@ const ProfileHero = ({ className }) => {
       </div>
 
       {/* Right */}
-      <div className="h-fit rounded-2xl border border-gray-200 bg-white p-6">
-        <h3 className="text-xl font-semibold text-gray-900">
-          Complete your profile
-        </h3>
 
-        <p className="mt-2 text-lg font-medium text-gray-700">80% Completed</p>
+      <ProfileCompletionBar setOpen={setOpen} />
 
-        {/* Progress */}
-        <div className="mt-4 h-2 overflow-hidden rounded-full bg-gray-200">
-          <div className="h-full w-4/5 rounded-full bg-violet-600" />
-        </div>
-
-        <div className="mt-6 space-y-4">
-          <div className="flex items-center gap-3">
-            <CircleCheckBig size={20} className="text-green-600" />
-            <span>Avatar</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <CircleCheckBig size={20} className="text-green-600" />
-            <span>Bio</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Circle size={20} className="text-gray-400" />
-            <span>Skills</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Circle size={20} className="text-gray-400" />
-            <span>Social Links</span>
-          </div>
-        </div>
-
-        <Button
-          className="hollowBtn mt-8 flex w-full items-center justify-center gap-2"
-          onClick={() => setOpen(true)}
-        >
-          Edit Profile
-          <FaEdit />
-        </Button>
-
-        <EditModal
-          open={isOpen}
-          setOpen={setOpen}
-          title="Personal Inforamation"
-        >
-          <EditPersonalInfo setOpen={setOpen} />
-        </EditModal>
-      </div>
+      <EditModal open={isOpen} setOpen={setOpen} title="Personal Inforamation">
+        <EditPersonalInfo setOpen={setOpen} />
+      </EditModal>
     </div>
   );
 };
