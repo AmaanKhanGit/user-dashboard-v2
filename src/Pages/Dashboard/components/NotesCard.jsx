@@ -24,7 +24,7 @@ const NotesCard = ({ note }) => {
       </div>
 
       <p className="mt-4 line-clamp-3 border-l-4 border-purple-200 pl-3 text-sm leading-6 text-gray-600">
-        {note.content}
+        {note.content.replace(/\n/g, " ").trim() + "..."}
       </p>
     </article>
   );

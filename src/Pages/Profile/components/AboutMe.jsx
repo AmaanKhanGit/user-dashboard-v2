@@ -24,7 +24,9 @@ const AboutMe = () => {
       </div>
       <div className="mt-3">
         {user.unsafeMetadata.about.length > 0 ? (
-          <p className="text-lg text-gray-600">{user.unsafeMetadata.about}</p>
+          <p className="text-lg whitespace-pre-wrap text-gray-600">
+            {user.unsafeMetadata.about}
+          </p>
         ) : (
           <EmptyState
             setOpen={setOpen}

@@ -81,7 +81,7 @@ const Task = ({
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
 
-          <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">
+          <p className="mt-2 line-clamp-2 text-sm leading-6 whitespace-pre-wrap text-slate-600">
             {content}
           </p>
         </div>

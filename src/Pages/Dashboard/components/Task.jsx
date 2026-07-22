@@ -40,7 +40,7 @@ const Task = ({ task }) => {
         </div>
 
         <p className="mt-3 line-clamp-3 border-l-4 border-purple-200 pl-3 text-sm leading-6 text-gray-600">
-          {task.content}
+          {task.content.replace(/\n/g, " ").trim() + "..."}
         </p>
 
         <p className="mt-2 text-xs font-medium text-gray-400">{task.dueDate}</p>
