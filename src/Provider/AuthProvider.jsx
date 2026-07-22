@@ -1,4 +1,4 @@
-import { useSignIn, useSignUp, useAuth } from "@clerk/react";
+import { useSignIn, useSignUp, useAuth, useUser } from "@clerk/react";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -204,6 +204,8 @@ const AuthProvider = ({ children }) => {
 
     return () => clearInterval(interval);
   }, [timer]);
+
+ 
 
   return (
     <AuthContext.Provider

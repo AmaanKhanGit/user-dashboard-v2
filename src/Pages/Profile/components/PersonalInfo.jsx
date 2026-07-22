@@ -5,14 +5,17 @@ import { FiLink } from "react-icons/fi";
 import { BsTelephone } from "react-icons/bs";
 import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import Button from "../../../components/Layout/Button";
-import { useUser } from "@clerk/react";
+import { useReverification, useUser } from "@clerk/react";
 import EditModal from "./EditModal";
 import EditPersonalInfo from "../modals/EditPersonalInfo";
 import { useState } from "react";
+import UpdatePasswordModal from "../modals/UpdatePasswordModal";
+import toast from "react-hot-toast";
 
 const PersonalInfo = ({ className }) => {
   const { user } = useUser();
   const [isOpen, setOpen] = useState(false);
+  const [isUpdatingPass, setUpdatingPass] = useState(false);
 
   const details = [
     {
@@ -37,6 +40,14 @@ const PersonalInfo = ({ className }) => {
       desc: user.createdAt.toDateString(),
     },
   ];
+
+  const handleUpdatePassword = useReverification((values) =>
+    user.updatePassword({
+      currentPassword: values.currentPassword,
+      newPassword: values.newPassword,
+      signOutOfOtherSessions: values.signOutOfOtherSessions,
+    }),
+  );
 
   return (
     <section className={`sections flex flex-col gap-2 ${className}`}>
@@ -80,13 +91,25 @@ const PersonalInfo = ({ className }) => {
             <p className="text-lg font-medium">Password</p>
             <p className="text-lg font-medium">••••••••</p>
           </div>
-          <Button className="hollowBtn self-end">Change Password</Button>
+          <Button
+            className="hollowBtn self-end"
+            onClick={() => setUpdatingPass(true)}
+          >
+            Change Password
+          </Button>
         </div>
       </div>
 
       <EditModal open={isOpen} setOpen={setOpen} title="Personal Inforamation">
         <EditPersonalInfo setOpen={setOpen} />
       </EditModal>
+
+      <UpdatePasswordModal
+        open={isUpdatingPass}
+        setOpen={setUpdatingPass}
+        onSubmit={handleUpdatePassword}
+        className=""
+      />
     </section>
   );
 };
