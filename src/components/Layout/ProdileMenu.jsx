@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
 import LogoutModal from "../../Pages/Profile/modals/LogoutModal";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleLogout = () => {
-    console.log("Logout");
-  };
+  const { handleLogout } = useContext(AuthContext);
 
   return (
     <div className="relative">
