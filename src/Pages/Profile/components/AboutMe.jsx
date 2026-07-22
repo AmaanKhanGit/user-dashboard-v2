@@ -10,10 +10,12 @@ const AboutMe = () => {
   const { user } = useUser();
   const [isOpen, setOpen] = useState(false);
 
+  const aboutText = user?.unsafeMetadata?.about || "";
+
   return (
     <section className="sections flex flex-col gap-2">
       <div className="flex justify-between">
-        <h2 className="text-xl font-bold"> About Me</h2>
+        <h2 className="text-xl font-bold">About Me</h2>
         <Button
           onClick={() => setOpen(true)}
           className="hollowBtn flex items-center gap-2 border-none bg-gray-100 dark:bg-gray-800"
@@ -23,19 +25,19 @@ const AboutMe = () => {
         </Button>
       </div>
       <div className="mt-3">
-        {user.unsafeMetadata.about.length > 0 ? (
+        {aboutText ? (
           <p className="text-lg whitespace-pre-wrap text-gray-600 dark:text-gray-300">
-            {user.unsafeMetadata.about}
+            {aboutText}
           </p>
         ) : (
           <EmptyState
             setOpen={setOpen}
             title="Nothing added about you"
-            desc="Tell us about your self"
+            desc="Tell us about yourself"
           />
         )}
       </div>
-      <EditModal open={isOpen} setOpen={setOpen} title="Edit about you">
+      <EditModal open={isOpen} setOpen={setOpen} title="Edit About You">
         <EditAbout setOpen={setOpen} />
       </EditModal>
     </section>

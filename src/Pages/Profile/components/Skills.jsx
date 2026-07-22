@@ -10,11 +10,14 @@ import { Plus } from "lucide-react";
 const Skills = () => {
   const [isOpen, setOpen] = useState(false);
   const { user } = useUser();
-  const skills = user.unsafeMetadata.skills;
+
+  // Safely handle skills array
+  const skills = user?.unsafeMetadata?.skills || [];
+
   return (
     <section className="sections flex flex-col gap-2">
       <div className="flex justify-between">
-        <h2 className="text-xl font-bold"> Skills</h2>
+        <h2 className="text-xl font-bold">Skills</h2>
         <Button
           onClick={() => setOpen(true)}
           className="hollowBtn flex items-center gap-2 border-none bg-gray-100 dark:bg-gray-800"

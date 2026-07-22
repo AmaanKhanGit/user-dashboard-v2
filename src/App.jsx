@@ -13,6 +13,7 @@ import Loading from "./components/Layout/Loading";
 import RootLayout from "./components/RootLayout";
 import ProfileProvider from "./Provider/ProfileProvider";
 import Workspace from "./Pages/Wrokspace/Workspace";
+import SSOCallback from "./Pages/Auth/SSOCallback";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectAuth>
             <ResetPassword />
+          </ProtectAuth>
+        ),
+      },
+      {
+        path: "/sso-callback",
+        element: (
+          <ProtectAuth>
+            <SSOCallback />
           </ProtectAuth>
         ),
       },

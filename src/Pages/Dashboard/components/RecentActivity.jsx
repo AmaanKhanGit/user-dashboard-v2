@@ -7,6 +7,7 @@ import { getActivities } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
 import WorkspaceLoading from "../../../Pages/Wrokspace/component/WorkspaceLoading";
 import { getRelativeTime } from "../../../services/services";
+import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
 const RecentActivity = ({ className }) => {
   const variants = {
     purpleVar: "bg-purple-100 text-purple-800",
