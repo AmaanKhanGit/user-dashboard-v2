@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-import { CalendarDays, MapPin } from "lucide-react";
+import {
+  CalendarDays,
+  Camera,
+  MoreVertical,
+  Trash2,
+  MapPin,
+} from "lucide-react";
 import {
   FaGithub,
   FaInstagram,
@@ -11,10 +17,12 @@ import { useUser } from "@clerk/react";
 import EditModal from "./EditModal";
 import EditPersonalInfo from "../modals/EditPersonalInfo";
 import ProfileCompletionBar from "./ProfileCompletionBar";
+import toast from "react-hot-toast";
 
 const ProfileHero = ({ className }) => {
   const { user } = useUser();
   const [isOpen, setOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const allSocialLinks = [
     { icon: FaGithub, link: user.unsafeMetadata.github },
@@ -29,6 +37,47 @@ const ProfileHero = ({ className }) => {
 
   const joinedDate = new Date(user.createdAt).toDateString();
 
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select an image.");
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Image must be under 2 MB.");
+      return;
+    }
+    // Upload logic here
+
+    try {
+      await user.setProfileImage({ file });
+      await user.reload();
+    } catch (error) {
+      toast.error(error);
+    } finally {
+      setIsMenuOpen(false);
+    }
+
+    console.log(file);
+
+    e.target.value = "";
+  };
+
+  const handleRemoveImage = async () => {
+    try {
+      await user.setProfileImage({ file: null });
+      await user.reload();
+    } catch (error) {
+      toast.error(error);
+    } finally {
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <div
       className={`grid gap-10 bg-transparent py-6 lg:grid-cols-[1fr_320px] lg:px-10 ${className}`}
@@ -36,11 +85,51 @@ const ProfileHero = ({ className }) => {
       {/* Left */}
       <div className="flex flex-col gap-6">
         <div className="flex items-center gap-6">
-          <img
-            className="h-32 w-32 rounded-full border-4 border-white bg-gray-200 object-cover shadow-sm"
-            src={user.imageUrl}
-            alt="profile"
-          />
+          <div className="relative h-32 w-32">
+            <img
+              className="h-full w-full rounded-full border-4 border-white object-cover shadow-sm"
+              src={user.imageUrl}
+              alt="Profile"
+            />
+
+            {/* More Actions */}
+            <button
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              className="absolute top-1 right-1 rounded-full bg-white p-1.5 text-gray-600 shadow transition hover:bg-gray-100"
+            >
+              <MoreVertical size={16} />
+            </button>
+
+            {/* Dropdown */}
+            {isMenuOpen && (
+              <div className="absolute top-10 right-0 z-10 w-44 overflow-hidden rounded-xl border border-gray-200 bg-white py-1 shadow-lg">
+                <label
+                  htmlFor="profile-image"
+                  className="flex cursor-pointer items-center gap-3 px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100"
+                >
+                  <Camera size={16} />
+                  <span>Change Photo</span>
+                </label>
+
+                <button
+                  onClick={handleRemoveImage}
+                  className="flex w-full cursor-pointer items-center gap-3 px-4 py-2 text-sm text-red-600 transition hover:bg-red-50"
+                >
+                  <Trash2 size={16} />
+                  <span>Remove Photo</span>
+                </button>
+              </div>
+            )}
+
+            {/* Hidden File Input */}
+            <input
+              id="profile-image"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageUpload}
+            />
+          </div>
 
           <div className="space-y-1">
             <h2 className="text-3xl font-bold text-gray-900">
