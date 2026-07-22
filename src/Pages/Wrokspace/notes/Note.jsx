@@ -63,7 +63,7 @@ const Note = ({ title, content, createdAt, noteId, userId }) => {
           </button>
 
           <button
-            onClick={() => deleteMutation.mutate({ userId, noteId })}
+            onClick={() => deleteMutation.mutate({ userId, noteId, title })}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-red-100 text-red-600"
           >
             {deleteMutation.isPending ? <CgSpinner /> : <FaTrash />}

@@ -110,7 +110,7 @@ const Task = ({
 
         <div className="flex items-center gap-2">
           <button
-            onClick={() => completeMutation.mutate({ userId, taskId })}
+            onClick={() => completeMutation.mutate({ userId, taskId, title })}
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-green-100 text-green-700"
           >
             <FaCheck />
@@ -125,7 +125,7 @@ const Task = ({
 
           <button
             disabled={deleteMutation.isPending}
-            onClick={() => deleteMutation.mutate({ userId, taskId })}
+            onClick={() => deleteMutation.mutate({ userId, taskId, title })}
             className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-red-100 text-red-600 ${deleteMutation.isPending && "cursor-not-allowed"}`}
           >
             {deleteMutation.isPending ? <CgSpinner /> : <FaTrash />}
