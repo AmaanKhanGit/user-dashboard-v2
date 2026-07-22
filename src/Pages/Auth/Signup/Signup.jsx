@@ -2,6 +2,7 @@ import { useContext } from "react";
 import VerifyEmail from "../components/VerifyEmail";
 import SignUpForm from "./SignUpForm";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import FormLayout from "../../../components/FormLayout";
 
 const Signup = () => {
   const {
@@ -13,7 +14,7 @@ const Signup = () => {
   } = useContext(AuthContext);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-purple-50 to-white px-4">
+    <FormLayout>
       {showVerificationScreen ? (
         <VerifyEmail
           onSubmit={handleVerifyEmailSubmit}
@@ -23,7 +24,7 @@ const Signup = () => {
       ) : (
         <SignUpForm fetchStatus={signUpFetchStatus} />
       )}
-    </div>
+    </FormLayout>
   );
 };
 

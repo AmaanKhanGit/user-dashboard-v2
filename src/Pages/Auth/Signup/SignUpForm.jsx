@@ -6,22 +6,20 @@ import { Link } from "react-router-dom";
 import { object, ref, string } from "yup";
 
 const signupValidation = object({
-  firstName: string().required("First Name is rquired"),
-  lastName: string().required("Last Name is rquired too"),
+  firstName: string().required("First Name is required"),
+  lastName: string().required("Last Name is required too"),
   email: string()
-    .email("please enter a valid email")
+    .email("Please enter a valid email")
     .required("Email is required"),
   password: string()
-    .min(8, "password must have atleast 8 characters")
+    .min(8, "Password must have at least 8 characters")
     .required("Password is required"),
   repeatPassword: string()
-    .required("please confirm your password")
-    .oneOf([ref("password")], "password must match"),
+    .required("Please confirm your password")
+    .oneOf([ref("password")], "Passwords must match"),
 });
 
 const SignUpForm = ({ fetchStatus }) => {
-  // AuthContext: use handleSignUpSubmit here as the submit handler for this form.
-
   const { handleSignUpSubmit } = useContext(AuthContext);
 
   return (
@@ -47,6 +45,7 @@ const SignUpForm = ({ fetchStatus }) => {
         onSubmit={handleSignUpSubmit}
       >
         <Form className="space-y-5">
+          {/* First Name */}
           <div>
             <label
               htmlFor="firstName"
@@ -59,7 +58,8 @@ const SignUpForm = ({ fetchStatus }) => {
               name="firstName"
               type="text"
               placeholder="John"
-              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+              disabled={fetchStatus === "fetching"}
+              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
             />
             <ErrorMessage name="firstName">
               {(msg) => (
@@ -67,6 +67,8 @@ const SignUpForm = ({ fetchStatus }) => {
               )}
             </ErrorMessage>
           </div>
+
+          {/* Last Name */}
           <div>
             <label
               htmlFor="lastName"
@@ -79,7 +81,8 @@ const SignUpForm = ({ fetchStatus }) => {
               name="lastName"
               type="text"
               placeholder="Doe"
-              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+              disabled={fetchStatus === "fetching"}
+              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
             />
             <ErrorMessage name="lastName">
               {(msg) => (
@@ -87,6 +90,8 @@ const SignUpForm = ({ fetchStatus }) => {
               )}
             </ErrorMessage>
           </div>
+
+          {/* Email */}
           <div>
             <label
               htmlFor="email"
@@ -99,7 +104,8 @@ const SignUpForm = ({ fetchStatus }) => {
               name="email"
               type="email"
               placeholder="you@example.com"
-              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+              disabled={fetchStatus === "fetching"}
+              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
             />
             <ErrorMessage name="email">
               {(msg) => (
@@ -108,6 +114,7 @@ const SignUpForm = ({ fetchStatus }) => {
             </ErrorMessage>
           </div>
 
+          {/* Password */}
           <div>
             <label
               htmlFor="password"
@@ -120,7 +127,9 @@ const SignUpForm = ({ fetchStatus }) => {
               name="password"
               type="password"
               placeholder="••••••••"
-              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+              autoComplete="new-password"
+              disabled={fetchStatus === "fetching"}
+              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
             />
             <ErrorMessage name="password">
               {(msg) => (
@@ -128,6 +137,8 @@ const SignUpForm = ({ fetchStatus }) => {
               )}
             </ErrorMessage>
           </div>
+
+          {/* Repeat Password */}
           <div>
             <label
               htmlFor="repeatPassword"
@@ -140,7 +151,9 @@ const SignUpForm = ({ fetchStatus }) => {
               name="repeatPassword"
               type="password"
               placeholder="••••••••"
-              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none"
+              autoComplete="new-password"
+              disabled={fetchStatus === "fetching"}
+              className="mt-2 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500"
             />
             <ErrorMessage name="repeatPassword">
               {(msg) => (
@@ -152,11 +165,16 @@ const SignUpForm = ({ fetchStatus }) => {
           {/* clerk captcha widget */}
           <div
             id="clerk-captcha"
-            data-cl-theme="light"
+            data-cl-theme={
+              window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+            }
             data-cl-size="flexible"
             data-cl-language="es-ES"
           />
 
+          {/* Submit Button */}
           <Button
             disabled={fetchStatus === "fetching"}
             type="submit"
@@ -165,13 +183,14 @@ const SignUpForm = ({ fetchStatus }) => {
             {fetchStatus === "fetching" ? "Submitting.." : "Sign Up"}
           </Button>
 
+          {/* Link to Sign In */}
           <p className="text-center text-sm text-gray-600 dark:text-gray-300">
-            Already have an account?
+            Already have an account?{" "}
             <Link
               to="/sign-in"
               className="font-semibold text-purple-600 hover:text-purple-700"
             >
-              Sign up
+              Sign in
             </Link>
           </p>
         </Form>
