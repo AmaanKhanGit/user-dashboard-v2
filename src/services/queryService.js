@@ -40,3 +40,17 @@ export const getRecentNotes = async (userId) => {
     ...doc.data(),
   }));
 };
+
+export const getActivities = async (userId) => {
+  const q = query(
+    collection(db, "users", userId, "activities"),
+    orderBy("timestamp", "desc"),
+    limit(4),
+  );
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};

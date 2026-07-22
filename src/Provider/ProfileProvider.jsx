@@ -1,4 +1,6 @@
+import { db } from "../firebase/firebase";
 import { useUser } from "@clerk/react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { createContext } from "react";
 import toast from "react-hot-toast";
 
@@ -39,6 +41,13 @@ const ProfileProvider = ({ children }) => {
           instagram,
         },
       });
+
+      await addDoc(collection(db, "users", user.id, "activities"), {
+        type: "profile",
+        title: "Profile Updated",
+        content: "You updated your profile",
+        timestamp: serverTimestamp(),
+      });
       toast.success("Profile Updated Successfully");
     } catch (error) {
       console.log(error);
@@ -52,6 +61,14 @@ const ProfileProvider = ({ children }) => {
           about: about,
         },
       });
+
+      await addDoc(collection(db, "users", user.id, "activities"), {
+        type: "profile",
+        title: "Profile Updated",
+        content: "You updated your profile",
+        timestamp: serverTimestamp(),
+      });
+
       toast.success("Profile Updated Successfully");
     } catch (error) {
       console.log(error);
@@ -65,6 +82,14 @@ const ProfileProvider = ({ children }) => {
           skills: skills,
         },
       });
+
+      await addDoc(collection(db, "users", user.id, "activities"), {
+        type: "profile",
+        title: "Profile Updated",
+        content: "You updated your profile",
+        timestamp: serverTimestamp(),
+      });
+
       toast.success("Profile Updated Successfully");
     } catch (error) {
       console.log(error);

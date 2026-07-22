@@ -1,6 +1,12 @@
 import Button from "../../../components/Layout/Button";
 import { CgLogIn, CgNotes } from "react-icons/cg";
 import { AiOutlineCheck, AiOutlineUser } from "react-icons/ai";
+import { FaClipboardList } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import { getActivities } from "../../../services/queryService";
+import { useUser } from "@clerk/react";
+import WorkspaceLoading from "../../../Pages/Wrokspace/component/WorkspaceLoading";
+import { getRelativeTime } from "../../../services/services";
 const RecentActivity = ({ className }) => {
   const variants = {
     purpleVar: "bg-purple-100 text-purple-800",
@@ -17,7 +23,7 @@ const RecentActivity = ({ className }) => {
       varient: variants.purpleVar,
     },
     {
-      icon: AiOutlineCheck,
+      icon: FaClipboardList,
       title: "Completed Task",
       description: "Design new dashboard UI",
       time: "1h ago",
@@ -30,9 +36,25 @@ const RecentActivity = ({ className }) => {
       time: "3m ago",
       varient: variants.redVar,
     },
-  
   ];
 
+  const { user } = useUser();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["recent-activity", user?.id],
+    queryFn: () => getActivities(user.id),
+    enabled: !!user?.id,
+  });
+
+  if (isLoading) {
+    return (
+      <section
+        className={`sections flex flex-col items-center justify-center gap-4`}
+      >
+        <WorkspaceLoading />
+      </section>
+    );
+  }
   return (
     <section className={`sections flex flex-col gap-5 ${className}`}>
       <div className="flex items-center justify-between">
@@ -40,26 +62,37 @@ const RecentActivity = ({ className }) => {
         <Button className="hollowBtn px-3 py-1">View all</Button>
       </div>
       <div className="flex flex-col gap-10">
-        {activities.map((activity) => {
-          const Icon = activity.icon;
+        {data?.map((activity) => {
+          const Icon =
+            activity.type === "note"
+              ? CgNotes
+              : activity.type === "task"
+                ? FaClipboardList
+                : AiOutlineUser;
+          // const time = activity.timestamp.toDate().toLocalDateString();
+
           return (
             <div
-              key={activity.title}
+              key={activity.id}
               className="flex items-center justify-between"
             >
               <div className="flex items-center gap-3">
-                <div className={`rounded-full p-2 text-xl ${activity.varient}`}>
+                <div
+                  className={`rounded-full p-2 text-xl ${activity.type === "note" ? "bg-blue-100 text-blue-800" : activity.type === "task" ? "bg-green-100 text-green-800" : "bg-purple-100 text-purple-800"}`}
+                >
                   <Icon />
                 </div>
                 <div className="flex flex-col items-start">
                   <h2 className="text-sm">{activity.title}</h2>
                   <p className="text-[13px] font-medium text-gray-400">
-                    {activity.description}
+                    {activity.content}
                   </p>
                 </div>
               </div>
 
-              <p className="shrink-0 text-sm text-gray-500">{activity.time}</p>
+              <p className="shrink-0 text-sm text-gray-500">
+                {getRelativeTime(activity.timestamp)}
+              </p>
             </div>
           );
         })}

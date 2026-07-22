@@ -52,6 +52,9 @@ const DashboardHero = ({ className }) => {
       queryClient.invalidateQueries({
         queryKey: ["today-tasks"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["recent-activity", user.id],
+      });
       toast.success("Task created successfully");
     },
     onError: (error) => {
@@ -65,6 +68,9 @@ const DashboardHero = ({ className }) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["recent-notes"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["recent-activity", user.id],
       });
       toast.success("Task created successfully");
     },
