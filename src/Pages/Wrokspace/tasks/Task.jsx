@@ -109,19 +109,24 @@ const Task = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => completeMutation.mutate({ userId, taskId, title })}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-green-100 text-green-700"
-          >
-            <FaCheck />
-          </button>
-
-          <button
-            onClick={() => setOpen(true)}
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-purple-100 text-purple-700"
-          >
-            <FaEdit />
-          </button>
+          {status !== "Completed" && (
+            <>
+              <button
+                onClick={() =>
+                  completeMutation.mutate({ userId, taskId, title })
+                }
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-green-100 text-green-700"
+              >
+                <FaCheck />
+              </button>
+              <button
+                onClick={() => setOpen(true)}
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-purple-100 text-purple-700"
+              >
+                <FaEdit />
+              </button>
+            </>
+          )}
 
           <button
             disabled={deleteMutation.isPending}

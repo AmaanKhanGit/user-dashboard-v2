@@ -18,7 +18,6 @@ const TaskSection = ({ className }) => {
     enabled: !!user?.id,
   });
 
-
   if (isLoading) {
     return (
       <section className={`flex flex-col rounded-xl p-5 shadow ${className}`}>
@@ -48,18 +47,20 @@ const TaskSection = ({ className }) => {
         />
       ) : (
         <div className="flex flex-col gap-3 bg-white">
-          {tasks.map((task) => (
-            <Task
-              key={task.id}
-              taskId={task.id}
-              userId={user.id}
-              title={task.title}
-              content={task.content}
-              createdAt={task.createdAt.toDate().toLocaleDateString("en-GB")}
-              dueDate={task.dueDate}
-              status={task.completed ? "Completed" : "Pending"}
-            />
-          ))}
+          {tasks
+            .filter((task) => !task.deleted)
+            .map((task) => (
+              <Task
+                key={task.id}
+                taskId={task.id}
+                userId={user.id}
+                title={task.title}
+                content={task.content}
+                createdAt={task.createdAt.toDate().toLocaleDateString("en-GB")}
+                dueDate={task.dueDate}
+                status={task.completed ? "Completed" : "Pending"}
+              />
+            ))}
         </div>
       )}
     </section>

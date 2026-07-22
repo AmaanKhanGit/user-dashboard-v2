@@ -27,7 +27,7 @@ export const handleAddNote = async ({ values, userId }) => {
 export const deleteNote = async ({ userId, noteId, title }) => {
   await deleteDoc(doc(db, "users", userId, "notes", noteId));
   await addDoc(collection(db, "users", userId, "activities"), {
-    type: "note",
+    type: "deletion",
     title: "Deleted a note",
     content: title,
     timestamp: serverTimestamp(),
@@ -55,6 +55,7 @@ export const handleAddTask = async ({ values, userId }) => {
     dueDate: values.dueDate,
     createdAt: serverTimestamp(),
     completed: false,
+    deleted: false,
   });
   await addDoc(collection(db, "users", userId, "activities"), {
     type: "task",
@@ -67,9 +68,14 @@ export const handleAddTask = async ({ values, userId }) => {
 // & notes
 
 export const deleteTask = async ({ userId, taskId, title }) => {
-  await deleteDoc(doc(db, "users", userId, "tasks", taskId));
+  await updateDoc(doc(db, "users", userId, "tasks", taskId), {
+    deleted: true,
+  });
+
+  // & we won't delete physically from database
+
   await addDoc(collection(db, "users", userId, "activities"), {
-    type: "task",
+    type: "deletion",
     title: "Deleted a task",
     content: title,
     timestamp: serverTimestamp(),

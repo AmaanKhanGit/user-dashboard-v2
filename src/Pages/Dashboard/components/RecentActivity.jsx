@@ -1,7 +1,7 @@
 import Button from "../../../components/Layout/Button";
 import { CgLogIn, CgNotes } from "react-icons/cg";
 import { AiOutlineCheck, AiOutlineUser } from "react-icons/ai";
-import { FaClipboardList } from "react-icons/fa";
+import { FaClipboardList, FaTrashAlt } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { getActivities } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
@@ -68,7 +68,9 @@ const RecentActivity = ({ className }) => {
               ? CgNotes
               : activity.type === "task"
                 ? FaClipboardList
-                : AiOutlineUser;
+                : activity.type === "deletion"
+                  ? FaTrashAlt
+                  : AiOutlineUser;
           // const time = activity.timestamp.toDate().toLocalDateString();
 
           return (
@@ -78,7 +80,7 @@ const RecentActivity = ({ className }) => {
             >
               <div className="flex items-center gap-3">
                 <div
-                  className={`rounded-full p-2 text-xl ${activity.type === "note" ? "bg-blue-100 text-blue-800" : activity.type === "task" ? "bg-green-100 text-green-800" : "bg-purple-100 text-purple-800"}`}
+                  className={`rounded-full p-2 text-xl ${activity.type === "note" ? "bg-blue-100 text-blue-800" : activity.type === "task" ? "bg-green-100 text-green-800" : activity.type === "deletion" ? "bg-red-100 text-red-800" : "bg-purple-100 text-purple-800"}`}
                 >
                   <Icon />
                 </div>
