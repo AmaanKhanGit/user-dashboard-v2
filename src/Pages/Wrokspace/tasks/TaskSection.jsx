@@ -4,19 +4,18 @@ import Task from "./Task";
 import { useQuery } from "@tanstack/react-query";
 import { getTasks } from "../../../services/queryService";
 import WorkspaceLoading from "../component/WorkspaceLoading";
+import { useMemo } from "react";
 
 const TaskSection = ({ className }) => {
   const { user } = useUser();
 
-  const {
-    data: tasks = [],
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["task-query", user.id],
     queryFn: () => getTasks(user.id),
     enabled: !!user?.id,
   });
+
+  let tasks = useMemo(() => data?.filter((el) => !el.deleted) ?? [], [data]);
 
   if (isLoading) {
     return (
@@ -36,7 +35,7 @@ const TaskSection = ({ className }) => {
         <h2 className="text-xl font-semibold text-slate-900">
           Tasks
           <span className="ml-2 text-base font-normal text-slate-500">
-            ({tasks.filter((task) => !task.deleted).length})
+            ({tasks.length})
           </span>
         </h2>
       </div>
@@ -47,20 +46,18 @@ const TaskSection = ({ className }) => {
         />
       ) : (
         <div className="flex flex-col gap-3 bg-white">
-          {tasks
-            .filter((task) => !task.deleted)
-            .map((task) => (
-              <Task
-                key={task.id}
-                taskId={task.id}
-                userId={user.id}
-                title={task.title}
-                content={task.content}
-                createdAt={task.createdAt.toDate().toLocaleDateString("en-GB")}
-                dueDate={task.dueDate}
-                status={task.completed ? "Completed" : "Pending"}
-              />
-            ))}
+          {tasks.map((task) => (
+            <Task
+              key={task.id}
+              taskId={task.id}
+              userId={user.id}
+              title={task.title}
+              content={task.content}
+              createdAt={task.createdAt.toDate().toLocaleDateString("en-GB")}
+              dueDate={task.dueDate}
+              status={task.completed ? "Completed" : "Pending"}
+            />
+          ))}
         </div>
       )}
     </section>
