@@ -2,9 +2,11 @@ import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
+import LogoutModal from "../../Pages/Profile/modals/LogoutModal";
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleLogout = () => {
     console.log("Logout");
@@ -35,12 +37,19 @@ const ProfileMenu = () => {
         </Link>
 
         <button
-          onClick={handleLogout}
+          onClick={() => setModalOpen(true)}
           className="w-full cursor-pointer rounded-xl px-4 py-3 text-left text-lg text-red-600 transition-colors hover:bg-red-50"
         >
           Logout
         </button>
       </div>
+      <LogoutModal
+        open={isModalOpen}
+        onClose={() => {
+          setModalOpen(false);
+        }}
+        onConfirm={handleLogout}
+      />
     </div>
   );
 };
