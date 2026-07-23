@@ -51,6 +51,16 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleSignInResend = async () => {
+    const { error } = await signIn.resetPasswordEmailCode.sendCode();
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Verification code sent again!");
+    setTimer(30);
+  };
+
   const handleSignInVerify = async ({ code }) => {
     const { error } = await signIn.resetPasswordEmailCode.verifyCode({
       code: code,
@@ -62,16 +72,6 @@ const AuthProvider = ({ children }) => {
     }
 
     navigate("/reset-password");
-  };
-
-  const handleSignInResend = async () => {
-    const { error } = await signIn.resetPasswordEmailCode.sendCode();
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-    toast.success("Verification code sent again!");
-    setTimer(30);
   };
 
   const handleResetPassword = async ({ password }) => {
