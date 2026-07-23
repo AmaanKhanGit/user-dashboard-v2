@@ -88,6 +88,8 @@ const ProfileHero = ({ className }) => {
           <div className="relative h-32 w-32">
             <img
               className="h-full w-full rounded-full border-4 border-white object-cover shadow-sm"
+              width="128"
+              height="128"
               src={user.imageUrl}
               alt="Profile"
             />

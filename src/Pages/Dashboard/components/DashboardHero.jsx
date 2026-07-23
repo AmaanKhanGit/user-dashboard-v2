@@ -1,7 +1,7 @@
 import { FaPlus } from "react-icons/fa";
 import Button from "../../../components/Layout/Button";
 import { useUser } from "@clerk/react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import AddItemModal from "../modal/AddItemModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -50,7 +50,7 @@ const DashboardHero = ({ className }) => {
     mutationFn: handleAddTask,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["today-tasks"],
+        queryKey: ["tasks", user.id],
       });
       queryClient.invalidateQueries({
         queryKey: ["recent-activity", user.id],
@@ -67,7 +67,7 @@ const DashboardHero = ({ className }) => {
     mutationFn: handleAddNote,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["recent-notes"],
+        queryKey: ["recent-notes", user.id],
       });
       queryClient.invalidateQueries({
         queryKey: ["recent-activity", user.id],
@@ -133,6 +133,8 @@ const DashboardHero = ({ className }) => {
       <div className="">
         <img
           className="h-64 object-contain"
+          width="256"
+          height="256"
           src="/dashboardHero.png"
           alt="dashboardHero"
         />

@@ -35,7 +35,7 @@ const Task = ({
     mutationFn: deleteTask,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["task-query"],
+        queryKey: ["tasks", userId],
       });
       toast.success("Task Deleted Successfully");
     },
@@ -50,7 +50,7 @@ const Task = ({
     mutationFn: editTask,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["task-query"],
+        queryKey: ["tasks", userId],
       });
       toast.success("Task Edited Succssfully!");
     },
@@ -64,7 +64,7 @@ const Task = ({
     mutationFn: completeTask,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["task-query"],
+        queryKey: ["tasks", userId],
       });
       toast.success("Congratulations to complete this task!");
     },

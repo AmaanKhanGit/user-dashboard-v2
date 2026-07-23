@@ -1,9 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import NotesCard from "./NotesCard";
-import { getNotes } from "../../../services/queryService";
+import { getRecentNotes } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
-import { Link } from "react-router-dom";
-import Button from "../../../components/Layout/Button";
 import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
 
 // const notes = [
@@ -34,8 +32,10 @@ const RecentNotes = () => {
   const { user } = useUser();
 
   const { data } = useQuery({
-    queryKey: ["recent-notes"],
-    queryFn: () => getNotes(user.id),
+    queryKey: ["recent-notes", user?.id],
+    queryFn: () => getRecentNotes(user.id),
+    enabled: !!user?.id,
+    staleTime: 60_000,
   });
 
   return (

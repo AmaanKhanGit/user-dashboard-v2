@@ -3,19 +3,17 @@ import Card from "./Card";
 import { CgNotes } from "react-icons/cg";
 import { getTasks } from "../../../services/queryService";
 
-import {
-  FaArrowTrendDown,
-  FaArrowTrendUp,
-  FaRegCircleCheck,
-} from "react-icons/fa6";
+import { FaArrowTrendUp, FaRegCircleCheck } from "react-icons/fa6";
 import { GoStopwatch } from "react-icons/go";
 import { useUser } from "@clerk/react";
 const StatusCards = ({ className }) => {
   const { user } = useUser();
 
   const { data } = useQuery({
-    queryKey: ["status-query"],
+    queryKey: ["tasks", user?.id],
     queryFn: () => getTasks(user.id),
+    enabled: !!user?.id,
+    staleTime: 60_000,
   });
 
   let total = 0;

@@ -18,9 +18,10 @@ const ProductivityGraph = ({ className }) => {
   const { user } = useUser();
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["productivity-graph", user?.id],
+    queryKey: ["tasks", user?.id],
     queryFn: () => getTasks(user.id),
-    enabled: !!user.id,
+    enabled: !!user?.id,
+    staleTime: 60_000,
   });
 
   const chartData = useMemo(() => {
@@ -62,7 +63,7 @@ const ProductivityGraph = ({ className }) => {
     if (isError) {
       toast.error(error.message);
     }
-  }, [isError]);
+  }, [error, isError]);
 
   if (isLoading) {
     return (

@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import Button from "../../../components/Layout/Button";
 import Task from "./Task";
 import { getTasks } from "../../../services/queryService";
 import { useUser } from "@clerk/react";
 import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
-import { Link } from "react-router-dom";
 import { useMemo } from "react";
 
 const TodaysTasks = () => {
   const { user } = useUser();
 
   const { data, isError, error } = useQuery({
-    queryKey: ["today-tasks"],
+    queryKey: ["tasks", user?.id],
     queryFn: () => getTasks(user.id),
+    enabled: !!user?.id,
+    staleTime: 60_000,
   });
 
   const todayTasks = useMemo(() => {

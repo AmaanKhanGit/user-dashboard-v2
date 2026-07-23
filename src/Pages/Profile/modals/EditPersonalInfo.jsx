@@ -1,12 +1,5 @@
 import { Form, Formik } from "formik";
-import {
-  User,
-  BriefcaseBusiness,
-  Phone,
-  Mail,
-  MapPin,
-  Globe,
-} from "lucide-react";
+import { User, BriefcaseBusiness, Mail, MapPin, Globe } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import FieldSet from "../components/FieldSet";
 import { useContext } from "react";

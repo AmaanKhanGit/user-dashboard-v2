@@ -1,6 +1,5 @@
-import Button from "../../../components/Layout/Button";
-import { CgLogIn, CgNotes } from "react-icons/cg";
-import { AiOutlineCheck, AiOutlineUser } from "react-icons/ai";
+import { CgNotes } from "react-icons/cg";
+import { AiOutlineUser } from "react-icons/ai";
 import { FaClipboardList, FaTrashAlt } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { getActivities } from "../../../services/queryService";
@@ -9,36 +8,6 @@ import WorkspaceLoading from "../../../Pages/Wrokspace/component/WorkspaceLoadin
 import { getRelativeTime } from "../../../services/services";
 import EmptyWorkspace from "../../../Pages/Wrokspace/component/EmptyWorkspace";
 const RecentActivity = ({ className }) => {
-  const variants = {
-    purpleVar: "bg-purple-100 text-purple-800",
-    greenVar: "bg-green-100 text-green-800",
-    redVar: "bg-red-100 text-red-800",
-    blueVar: "bg-blue-100 text-blue-800",
-  };
-  const activities = [
-    {
-      icon: AiOutlineUser,
-      title: "Updated Profile",
-      description: "You updated your profile information",
-      time: "2m ago",
-      varient: variants.purpleVar,
-    },
-    {
-      icon: FaClipboardList,
-      title: "Completed Task",
-      description: "Design new dashboard UI",
-      time: "1h ago",
-      varient: variants.greenVar,
-    },
-    {
-      icon: CgNotes,
-      title: "Created Note",
-      description: "Meeting notes - Project Alpha",
-      time: "3m ago",
-      varient: variants.redVar,
-    },
-  ];
-
   const { user } = useUser();
 
   const { data, isLoading } = useQuery({

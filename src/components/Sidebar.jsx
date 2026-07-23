@@ -1,10 +1,4 @@
-import {
-  FaBell,
-  FaCog,
-  FaHome,
-  FaQuestionCircle,
-  FaUser,
-} from "react-icons/fa";
+import { FaHome, FaUser } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import Button from "./Layout/Button";
 import { useContext, useState } from "react";

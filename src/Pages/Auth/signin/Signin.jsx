@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import FormLayout from "../../../components/FormLayout";
 import AuthCard from "../../../components/AuthCard";
 import { useSignIn } from "@clerk/react";
-import toast from "react-hot-toast";
 import { useContext, useEffect, useState } from "react";
 import VerifyEmail from "../components/VerifyEmail";
 import SignInForm from "./SignInForm";

@@ -1,19 +1,22 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Dashboard from "./Pages/Dashboard/Dashboard";
-import Profile from "./Pages/Profile/Profile";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Signin from "./Pages/Auth/Signin/Signin";
-import Signup from "./Pages/Auth/Signup/Signup";
-import ResetPassword from "./Pages/Auth/components/ResetPassword";
 import ProtectAuth from "./ProtectedRoute/ProtectAuth";
 import ProtectApp from "./ProtectedRoute/ProtectApp";
 import { useAuth } from "@clerk/react";
 import Loading from "./components/Layout/Loading";
 import RootLayout from "./components/RootLayout";
-import ProfileProvider from "./Provider/ProfileProvider";
-import Workspace from "./Pages/Wrokspace/Workspace";
-import SSOCallback from "./Pages/Auth/SSOCallback";
+
+const Dashboard = lazy(() => import("./Pages/Dashboard/Dashboard"));
+const Profile = lazy(() => import("./Pages/Profile/Profile"));
+const Workspace = lazy(() => import("./Pages/Wrokspace/Workspace"));
+const Signin = lazy(() => import("./Pages/Auth/Signin/Signin"));
+const Signup = lazy(() => import("./Pages/Auth/Signup/Signup"));
+const ResetPassword = lazy(
+  () => import("./Pages/Auth/components/ResetPassword"),
+);
+const SSOCallback = lazy(() => import("./Pages/Auth/SSOCallback"));
 
 const router = createBrowserRouter([
   {
@@ -30,21 +33,17 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          <ProfileProvider>
-            <ProtectApp>
-              <Profile />
-            </ProtectApp>
-          </ProfileProvider>
+          <ProtectApp>
+            <Profile />
+          </ProtectApp>
         ),
       },
       {
         path: "/workspace",
         element: (
-          <ProfileProvider>
-            <ProtectApp>
-              <Workspace />
-            </ProtectApp>
-          </ProfileProvider>
+          <ProtectApp>
+            <Workspace />
+          </ProtectApp>
         ),
       },
       {
@@ -82,7 +81,15 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60_000,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 function App() {
   const { isLoaded } = useAuth();
@@ -93,7 +100,9 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <Suspense fallback={<Loading />}>
+          <RouterProvider router={router} />
+        </Suspense>
         <Toaster
           position="bottom-center"
           toastOptions={{

@@ -1,8 +1,6 @@
 import { MdEdit } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
-import { FiLink } from "react-icons/fi";
-import { BsTelephone } from "react-icons/bs";
 import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import Button from "../../../components/Layout/Button";
 import { useReverification, useUser } from "@clerk/react";
@@ -10,7 +8,6 @@ import EditModal from "./EditModal";
 import EditPersonalInfo from "../modals/EditPersonalInfo";
 import { useState } from "react";
 import UpdatePasswordModal from "../modals/UpdatePasswordModal";
-import toast from "react-hot-toast";
 
 const PersonalInfo = ({ className }) => {
   const { user } = useUser();

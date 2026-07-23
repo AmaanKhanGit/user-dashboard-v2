@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
 import LogoutModal from "../../Pages/Profile/modals/LogoutModal";
 import { AuthContext } from "../../Provider/AuthProvider";
 

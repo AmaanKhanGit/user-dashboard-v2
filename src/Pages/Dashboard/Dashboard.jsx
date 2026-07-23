@@ -7,8 +7,6 @@ import StatusCards from "./components/StatusCards";
 import TodaysTasks from "./components/TodaysTasks";
 import { useEffect } from "react";
 import RecentNotes from "./components/RecentNotes";
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
 
 const Dashboard = () => {
   const { user, isLoaded } = useUser();

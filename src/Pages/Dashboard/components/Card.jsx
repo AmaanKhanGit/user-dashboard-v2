@@ -1,8 +1,5 @@
-import Dropdown from "../../../components/Layout/Dropdown";
-
 const Card = ({ card }) => {
   const Icon = card.icon;
-  const TrendIcon = card.arrowIcon;
 
   return (
     <div className="sections w-full">

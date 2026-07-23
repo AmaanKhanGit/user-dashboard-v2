@@ -1,27 +1,4 @@
-import { useUser } from "@clerk/react";
-import { completeTask } from "../../../services/mutationService";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import ActionLoader from "../../..//Pages/Wrokspace/component/ActionLoader";
-
 const Task = ({ task }) => {
-  const { user } = useUser();
-  const queryClient = useQueryClient();
-
-  const { mutate, isPending } = useMutation({
-    mutationKey: ["completed-task"],
-    mutationFn: completeTask,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["today-tasks"],
-      });
-      toast.success("Congratulations to complete this task!");
-    },
-    onError: (error) => {
-      toast.error(error);
-    },
-  });
-
   return (
     <div className="flex items-start gap-4 rounded-xl border border-gray-200 p-3 dark:border-gray-800">
       <div className="flex-1">
