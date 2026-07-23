@@ -29,14 +29,17 @@ const ProfileMenu = () => {
             : "invisible -translate-y-3 opacity-0"
         }`}
       >
-        <Link to="/profile">
+        <Link onClick={() => setIsOpen(false)} to="/profile">
           <button className="w-full cursor-pointer rounded-xl px-4 py-3 text-left text-lg transition-colors hover:bg-gray-100 dark:hover:bg-gray-800">
             Profile
           </button>
         </Link>
 
         <button
-          onClick={() => setModalOpen(true)}
+          onClick={() => {
+            setModalOpen(true);
+            setIsOpen(false);
+          }}
           className="w-full cursor-pointer rounded-xl px-4 py-3 text-left text-lg text-red-600 transition-colors hover:bg-red-50"
         >
           Logout

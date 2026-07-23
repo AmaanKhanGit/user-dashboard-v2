@@ -1,4 +1,4 @@
-import { useSignIn, useSignUp, useAuth, useUser } from "@clerk/react";
+import { useSignIn, useSignUp, useAuth } from "@clerk/react";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -23,6 +23,7 @@ const AuthProvider = ({ children }) => {
       });
 
       if (error) {
+        console.error(error);
         toast.error(error.message);
         return;
       }
@@ -98,15 +99,24 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleSocialLogin = async (appName) => {
-    const { error } = await signIn.sso({
-      strategy: appName,
-      redirectCallbackUrl: "/sso-callback",
-      redirectUrl: "/",
-    });
+    await signIn.reset();
 
-    if (error) {
-      toast.error(error.message);
-      return;
+    await Promise.resolve();
+
+    try {
+      const { error } = await signIn.sso({
+        strategy: appName,
+        redirectCallbackUrl: "/sso-callback",
+        redirectUrl: "/",
+      });
+
+      if (error) {
+        console.log(error);
+        toast.error(error.message);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -204,8 +214,6 @@ const AuthProvider = ({ children }) => {
 
     return () => clearInterval(interval);
   }, [timer]);
-
- 
 
   return (
     <AuthContext.Provider
