@@ -11,7 +11,7 @@ import RootLayout from "./components/RootLayout";
 const Dashboard = lazy(() => import("./Pages/Dashboard/Dashboard"));
 const Profile = lazy(() => import("./Pages/Profile/Profile"));
 const Workspace = lazy(() => import("./Pages/Wrokspace/Workspace"));
-const Signin = lazy(() => import("./Pages/Auth/Signin/Signin"));
+const Signin = lazy(() => import("./Pages/Auth/temp/Signin"));
 const Signup = lazy(() => import("./Pages/Auth/Signup/Signup"));
 const ResetPassword = lazy(
   () => import("./Pages/Auth/components/ResetPassword"),
