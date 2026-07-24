@@ -17,7 +17,7 @@ const Note = ({ title, content, createdAt, noteId, userId }) => {
     mutationFn: deleteNote,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["note-query", userId],
+        queryKey: ["notes", userId],
       });
       toast.success("Note Deleted Succssfully!");
     },
@@ -31,7 +31,7 @@ const Note = ({ title, content, createdAt, noteId, userId }) => {
     mutationFn: editNote,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["note-query", userId],
+        queryKey: ["notes", userId],
       });
       toast.success("Note Edited Succssfully!");
     },

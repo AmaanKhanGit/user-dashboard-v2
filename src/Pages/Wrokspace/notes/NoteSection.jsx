@@ -13,7 +13,7 @@ const NoteSection = ({ className }) => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["note-query", user.id],
+    queryKey: ["notes", user.id],
     queryFn: () => getNotes(user.id),
     enabled: !!user?.id,
   });

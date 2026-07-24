@@ -10,7 +10,7 @@ const TaskSection = ({ className }) => {
   const { user } = useUser();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["task-query", user.id],
+    queryKey: ["tasks", user.id],
     queryFn: () => getTasks(user.id),
     enabled: !!user?.id,
   });
