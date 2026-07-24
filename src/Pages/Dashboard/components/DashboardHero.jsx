@@ -67,6 +67,9 @@ const DashboardHero = ({ className }) => {
     mutationFn: handleAddNote,
     onSuccess: () => {
       queryClient.invalidateQueries({
+        queryKey: ["notes", user.id],
+      });
+      queryClient.invalidateQueries({
         queryKey: ["recent-notes", user.id],
       });
       queryClient.invalidateQueries({
