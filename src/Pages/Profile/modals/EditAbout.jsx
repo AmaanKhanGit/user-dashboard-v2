@@ -44,7 +44,7 @@ const EditAbout = ({ setOpen }) => {
               </p>
 
               <span className="text-xs font-medium text-gray-500">
-                {values.about.length}/220
+                {values.about ? values.about.length : 0}/220
               </span>
             </div>
           </div>
