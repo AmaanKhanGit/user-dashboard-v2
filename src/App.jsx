@@ -72,11 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/sso-callback",
-        element: (
-          <ProtectAuth>
-            <SSOCallback />
-          </ProtectAuth>
-        ),
+        element: <SSOCallback />,
       },
     ],
   },
