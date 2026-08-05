@@ -7,6 +7,7 @@ import ProtectApp from "./ProtectedRoute/ProtectApp";
 import { useAuth } from "@clerk/react";
 import Loading from "./components/Layout/Loading";
 import RootLayout from "./components/RootLayout";
+import NotFound from "./components/NotFound";
 
 const Dashboard = lazy(() => import("./Pages/Dashboard/Dashboard"));
 const Profile = lazy(() => import("./Pages/Profile/Profile"));
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "/sso-callback",
         element: <SSOCallback />,
+      },
+      {
+        path: "/*",
+        element: <NotFound />,
       },
     ],
   },
